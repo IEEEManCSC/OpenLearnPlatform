@@ -1,5 +1,5 @@
 {
-  "name": "OpenLearnPlatform",
+  "name": "open-learn-platform",
   "private": true,
   "scripts": {
     "build": "turbo run build",
