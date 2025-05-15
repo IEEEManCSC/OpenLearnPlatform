@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -43,6 +43,11 @@
   --color-IEEEorange: #f7a501;
   --color-lightOrange: #fff6e6;
   --color-PlaceHolderGray: #b3b3b3;
+  --color-main-green-100: #429661;
+  --color-main-green-900: #f0f4f2;
+  --color-danger-100: #da2b52;
+  --color-danger-900: #ffebe4;
+  --color-secondary-gray: #4d4d4d;
   --breakpoint-1xl: 1430px;
 }
 
@@ -121,6 +126,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Cairo", sans-serif;
+    font-family: 'Cairo', sans-serif;
   }
 }
