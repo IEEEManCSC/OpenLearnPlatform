@@ -23,42 +23,42 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/choose",
-    element: <ChooseTrack />,
+    path: 'choose',
+    element: <ChooseTrack />
   },
   {
     path: "/",
     element: <MainLayout />,
-
     children: [
       {
         index: true,
         element: <Dashboard />,
       },
       {
-        path: "roadmap",
-        element: <Roadmap />,
+        path: 'roadmap',
+        element: <Roadmap />
       },
       {
-        path: "leader",
-        element: <LeaderBoard />,
+        path: 'leader',
+        element: <LeaderBoard />
       },
       {
-        path: "quiz",
-        element: <Quiz />,
+        path: 'quiz',
+        element: <Quiz />
       },
       {
-        path: "profile",
-        element: <Profile />,
+        path: 'profile',
+        element: <Profile />
       },
       {
-        path: "setting",
-        element: <Settings />,
+        path: 'setting',
+        element: <Settings />
       },
       {
-        path: "help",
-        element: <Help />,
+        path: 'help',
+        element: <Help />
       },
+
     ],
   },
 ]);
