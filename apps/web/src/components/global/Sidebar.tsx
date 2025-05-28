@@ -27,7 +27,7 @@ type proptype = {
 
 function Sidebar({ activeLink, setActiveLink,mobile=false }: proptype) {
     return (
-        <div className={`${!mobile?'hidden':'flex mt-14 '} sm:flex bg-white text-xl text-zinc-400 font-semibold h-[550px] rounded-ee-[3rem] rounded-se-[3rem] p-8 flex-col justify-between`}>
+        <div className={`${!mobile?'hidden':'flex mt-14 '} fixed  sm:flex bg-white text-xl text-zinc-400 font-semibold h-[550px] rounded-ee-[3rem] rounded-se-[3rem] p-8 flex-col justify-between`}>
             <div className="space-y-2">
                 {
                     sidebarTop.map(e => {

@@ -16,6 +16,7 @@ import Profile from "../pages/Profile";
 import Settings from "../pages/Settings";
 import Help from "../pages/Help";
 import ChooseTrack from "../pages/ChooseTrack";
+import Notes from "../pages/Notes";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: 'help',
         element: <Help />
+      },
+      {
+        path: 'notes',
+        element: <Notes />
       },
 
     ],
