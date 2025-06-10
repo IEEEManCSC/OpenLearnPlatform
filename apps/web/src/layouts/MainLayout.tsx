@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Nav from "../components/global/Nav";
 import Sidebar from "../components/global/Sidebar";
-import { useState } from "react";
+
 const MainLayout = () => {
   const [activeLink, setActiveLink] = useState("dashboard");
+
   return (
     <div className="bg-secondary/50 min-h-screen">
       <Nav activelink={activeLink} setActiveLink={setActiveLink} />

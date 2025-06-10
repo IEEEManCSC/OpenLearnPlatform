@@ -29,7 +29,7 @@ const Nav = ({ activelink, setActiveLink }: propType) => {
           <div className="hidden items-center gap-5 sm:flex">
             <Bell />
             <div className="flex items-center gap-2">
-              <p className="h-10 w-10 rounded-full bg-gray-200"></p>
+              <p className="h-10 w-10 rounded-full bg-secondary"></p>
               <p>Name</p>
             </div>
           </div>
@@ -37,7 +37,7 @@ const Nav = ({ activelink, setActiveLink }: propType) => {
             <SheetTrigger asChild>
               <Button
                 size="icon"
-                className="hover:bg-lightOrange h-10 w-10 bg-transparent text-3xl sm:hidden"
+                className="cursor-pointer hover:bg-lightOrange shadow-none h-10 w-10 bg-transparent text-3xl sm:hidden"
               >
                 <Menu size={25} color="black" />
                 <span className="sr-only">Toggle menu</span>
