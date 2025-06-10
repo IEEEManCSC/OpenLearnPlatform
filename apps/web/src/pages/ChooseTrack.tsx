@@ -6,7 +6,7 @@ import DataEngineering from "../../public/trackIcons/Frame 1261156626.svg?react"
 import Embedded from "../../public/trackIcons/Mask group.svg?react";
 import Frontend from "../../public/trackIcons/html-5.svg?react";
 import Cyber from "../../public/trackIcons/security-safe.svg?react";
-import Frame from '../../public/trackIcons/Frametrack.png'
+import Frame from "../../public/trackIcons/Frametrack.svg?react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
@@ -24,24 +24,25 @@ function ChooseTrack() {
   ];
   const levels = ["Beginner", "Intermediate", "Advanced"];
   const [selected, setSelected] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   return (
-    <div className="bg-gray-50 min-h-screen ">
-      <img src={Frame} alt=""  />
-      <div className=" sm:text-2xl text-xl lg:-mt-10 lg:w-2/3 sm:10/12 w-11/12 m-auto">
+    <div className="min-h-screen bg-gray-50">
+      <Frame />
+      <div className="sm:10/12 m-auto w-11/12 text-xl sm:text-2xl lg:-mt-10 lg:w-2/3">
         <div>
-          <p className="text-center font-semibold mb-5">
+          <p className="mb-5 text-center font-semibold">
             which track are you interested in?
           </p>
-          <div className="grid md:grid-cols-4 grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
             {tracks.map((t) => {
               const Icon = t.icon;
               return (
                 <div
-                  className={`font-semibold flex flex-col gap-2 items-center ${selected === t.name
+                  className={`flex flex-col items-center gap-2 font-semibold ${
+                    selected === t.name
                       ? "bg-IEEEorange text-white"
                       : "text-IEEEorange bg-white"
-                    } cursor-pointer text-center rounded-md p-5 py-10 shadow-md`}
+                  } cursor-pointer rounded-md p-5 py-10 text-center shadow-md`}
                   onClick={() => setSelected(t.name)}
                 >
                   <Icon />
@@ -53,25 +54,38 @@ function ChooseTrack() {
         </div>
 
         <div className="mt-10">
-          <p className="text-center font-semibold mb-5">
+          <p className="mb-5 text-center font-semibold">
             What is your current level in Programming Basics
           </p>
           <div className="flex gap-8 self-center">
-            <div className="flex justify-between sm:gap-5 gap-2 w-full md:mb-10 mb-5">
+            <div className="mb-5 flex w-full justify-between gap-2 sm:gap-5 md:mb-10">
               {levels.map((l) => (
-                <div className="flex sm:gap-2 gap-1 items-center sm:text-2xl xs:text-lg text-base ">
-                  <input type="radio" name="level" className="sm:w-5 sm:h-5 peer" />
+                <div className="xs:text-lg flex items-center gap-1 text-base sm:gap-2 sm:text-2xl">
+                  <input
+                    type="radio"
+                    name="level"
+                    className="peer sm:h-5 sm:w-5"
+                  />
                   {/* checked:accent-IEEEorange   */}
                   <p className="peer-checked:text-IEEEorange">{l}</p>
                 </div>
               ))}
             </div>
-            <div className="h-10 w-10 bg-IEEEorange rounded-full md:flex hidden items-center justify-center cursor-pointer" onClick={()=>navigate('/')}>
+            <div
+              className="bg-IEEEorange hidden h-10 w-10 cursor-pointer items-center justify-center rounded-full md:flex"
+              onClick={() => navigate("/")}
+            >
               <ChevronRight color="white" />
             </div>
           </div>
-          <div className=" flex md:hidden items-center justify-end cursor-pointer" onClick={()=>navigate('/')}>
-            <ChevronRight color="white" className="h-8 w-8 bg-IEEEorange rounded-full mb-5" />
+          <div
+            className="flex cursor-pointer items-center justify-end md:hidden"
+            onClick={() => navigate("/")}
+          >
+            <ChevronRight
+              color="white"
+              className="bg-IEEEorange mb-5 h-8 w-8 rounded-full"
+            />
           </div>
         </div>
       </div>

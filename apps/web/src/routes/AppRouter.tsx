@@ -5,9 +5,6 @@ import MainLayout from "@layouts/MainLayout";
 
 // Pages
 import Login from "@pages/Login";
-
-// Router Functions
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Roadmap from "../pages/Roadmap";
 import LeaderBoard from "../pages/LeaderBoard";
@@ -16,7 +13,10 @@ import Profile from "../pages/Profile";
 import Settings from "../pages/Settings";
 import Help from "../pages/Help";
 import ChooseTrack from "../pages/ChooseTrack";
-import Notes from "../pages/Notes";
+import Course from "../pages/Course";
+
+// Router Functions
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: 'choose',
-    element: <ChooseTrack />
+    path: "choose",
+    element: <ChooseTrack />,
   },
   {
     path: "/",
@@ -36,34 +36,33 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: 'roadmap',
-        element: <Roadmap />
+        path: "roadmap",
+        element: <Roadmap />,
       },
       {
-        path: 'leader',
-        element: <LeaderBoard />
+        path: "leader",
+        element: <LeaderBoard />,
       },
       {
-        path: 'quiz',
-        element: <Quiz />
+        path: "quiz",
+        element: <Quiz />,
       },
       {
-        path: 'profile',
-        element: <Profile />
+        path: "profile",
+        element: <Profile />,
       },
       {
-        path: 'setting',
-        element: <Settings />
+        path: "settings",
+        element: <Settings />,
       },
       {
-        path: 'help',
-        element: <Help />
+        path: "help",
+        element: <Help />,
       },
       {
-        path: 'notes',
-        element: <Notes />
+        path: "course/:courseId",
+        element: <Course />,
       },
-
     ],
   },
 ]);
