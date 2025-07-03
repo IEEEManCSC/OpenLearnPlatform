@@ -8,15 +8,15 @@ import Roadmap from '../../../public/icons/teacher.svg?react'
 import { Link } from 'react-router-dom'
 
 const sidebarTop = [
-    { icon: Dashboard, txt: 'dashboard', path: '' },
-    { icon: Roadmap, txt: 'road map', path: 'roadmap' },
-    { icon: Leader, txt: 'Leader board', path: 'leader' },
-    { icon: Quiz, txt: 'quiz', path: 'quiz' },
+    { icon: Dashboard, txt: 'Dashboard', path: '' },
+    { icon: Roadmap, txt: 'Roadmap', path: 'roadmap' },
+    { icon: Leader, txt: 'Leaderboard', path: 'leader' },
+    { icon: Quiz, txt: 'Quizs', path: 'quiz' },
     { icon: Profile, txt: 'Profile', path: 'profile' },
 ]
 const sidebarBottom = [
-    { icon: Setting, txt: 'Setting',path:'setting' },
-    { icon: Help, txt: 'help center',path:'help' },
+    { icon: Setting, txt: 'Settings',path:'setting' },
+    { icon: Help, txt: 'Help Center',path:'help' },
 ]
 
 type proptype = {
