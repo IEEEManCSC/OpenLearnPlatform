@@ -13,7 +13,7 @@ type propType = {
 const Nav = ({ activelink, setActiveLink }: propType) => {
   return (
     <header className="sticky top-0 z-50 mx-auto mb-3 flex justify-center bg-white">
-      <div className="relative flex w-full items-center justify-between gap-10 rounded-b-2xl px-8 py-3">
+      <div className="relative flex w-full items-center justify-between gap-10 rounded-b-2xl px-5 py-3 md:px-8">
         {/* Logo */}
         <div className="flex items-center gap-20">
           <Link to="/" className="relative h-10 w-28 md:h-14 md:w-36">
@@ -29,7 +29,7 @@ const Nav = ({ activelink, setActiveLink }: propType) => {
           <div className="hidden items-center gap-5 sm:flex">
             <Bell />
             <div className="flex items-center gap-2">
-              <p className="h-10 w-10 rounded-full bg-secondary"></p>
+              <p className="bg-secondary h-10 w-10 rounded-full"></p>
               <p>Name</p>
             </div>
           </div>
@@ -37,7 +37,7 @@ const Nav = ({ activelink, setActiveLink }: propType) => {
             <SheetTrigger asChild>
               <Button
                 size="icon"
-                className="cursor-pointer hover:bg-lightOrange shadow-none h-10 w-10 bg-transparent text-3xl sm:hidden"
+                className="hover:bg-lightOrange h-10 w-10 cursor-pointer bg-transparent text-3xl shadow-none sm:hidden"
               >
                 <Menu size={25} color="black" />
                 <span className="sr-only">Toggle menu</span>
