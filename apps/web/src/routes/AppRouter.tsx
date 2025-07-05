@@ -15,6 +15,7 @@ import Help from "../pages/Help";
 import ChooseTrack from "../pages/ChooseTrack";
 import Course from "../pages/Course";
 import Topic from "../pages/Topic";
+import Task from "../pages/Task";
 
 // Router Functions
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "topic/:topicId",
         element: <Topic />,
+      },
+      {
+        path: "task/:taskId",
+        element: <Task />,
       },
     ],
   },
