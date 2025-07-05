@@ -14,6 +14,7 @@ import Settings from "../pages/Settings";
 import Help from "../pages/Help";
 import ChooseTrack from "../pages/ChooseTrack";
 import Course from "../pages/Course";
+import Topic from "../pages/Topic";
 
 // Router Functions
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "course/:courseId",
         element: <Course />,
+      },
+      {
+        path: "topic/:topicId",
+        element: <Topic />,
       },
     ],
   },
