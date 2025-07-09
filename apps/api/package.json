@@ -4,21 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "echo 'dev 2'"
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "check-types": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "6.11.1",
+    "better-auth": "^1.2.12",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {
+    "@better-auth/cli": "^1.2.12",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.3",
     "eslint": "^9.25.1",
-    "prisma": "^6.7.0",
+    "prisma": "^6.11.1",
     "tsx": "^4.19.4",
     "typescript": "5.8.2"
   }
