@@ -19,7 +19,7 @@ import Task from "../pages/Task";
 
 // Router Functions
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AllNotes from "../components/Dashboard/AllNotes";
+import AllNotes from "../pages/AllNotes";
 
 const router = createBrowserRouter([
   {
