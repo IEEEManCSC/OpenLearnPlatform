@@ -19,6 +19,7 @@ import Task from "../pages/Task";
 
 // Router Functions
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AllNotes from "../components/Dashboard/AllNotes";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "task/:taskId",
         element: <Task />,
+      },
+      {
+        path: "notes",
+        element: <AllNotes />,
       },
     ],
   },
