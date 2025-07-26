@@ -22,7 +22,7 @@ function Notes() {
                         </div>
                     )
                 }
-                <Link to={'/notes'} className="justify-center text-xl font-bold text-IEEEorange group flex cursor-pointer items-center gap-1 mt-2">
+                <Link to={'notes'} className="justify-center text-xl font-bold text-IEEEorange group flex cursor-pointer items-center gap-1 mt-2">
                     <p>View All</p>
                     <span className="transition-all duration-200 group-hover:translate-x-1.5">
                         <ChevronRight/>
