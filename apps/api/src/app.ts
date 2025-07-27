@@ -1,18 +1,12 @@
 import express from 'express';
-import { auth } from './lib/auth';
-import { toNodeHandler, fromNodeHeaders } from "better-auth/node";
+import { auth } from './lib/auth.js';
+import { toNodeHandler } from "better-auth/node";
+import { admin, adminRouter } from './lib/admin.js';
 
 const app = express();
 
-app.all('/api/auth/{*any}', toNodeHandler(auth));
-
-app.use(async (req, res, next) => {
-    const session = await auth.api.getSession({
-        headers: fromNodeHeaders(req.headers),
-    });
-
-    // handle guard logic
-    next();
-});
+app.all('/api/auth/*', toNodeHandler(auth));
+app.use(admin.options.rootPath, adminRouter);
+console.log(`AdminJS is running under ${admin.options.rootPath}`);
 
 export default app;
