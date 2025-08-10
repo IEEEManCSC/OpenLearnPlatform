@@ -5,9 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider     = "prisma-client"
   moduleFormat = "esm"
-  output   = "../src/generated/prisma"
+  output       = "../src/generated/prisma"
 }
 
 datasource db {
@@ -52,19 +52,20 @@ model Course {
 }
 
 model Topic {
-  id                String           @id @default(cuid())
+  id                String                 @id @default(cuid())
   title             String
   durationInMinutes Int
-  content           String           @db.Text
+  content           String                 @db.Text
   order             Int
   courseId          String
-  course            Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course            Course                 @relation(fields: [courseId], references: [id], onDelete: Cascade)
   createdBy         String
-  createdByUser     User             @relation(fields: [createdBy], references: [id], onDelete: Cascade)
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
+  createdByUser     User                   @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
   userCompletions   UserCompletion[]
   questions         Question[]
+  userPerformances  UserTopicPerformance[]
 }
 
 model UserCompletion {
@@ -75,6 +76,21 @@ model UserCompletion {
   topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, topicId])
+}
+
+model UserTopicPerformance {
+  id         String             @id @default(cuid())
+  userId     String
+  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topicId    String
+  topic      Topic              @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  difficulty QuestionDifficulty
+  attempted  Int                @default(0)
+  solved     Int                @default(0)
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
 
   @@unique([userId, topicId])
 }
@@ -110,6 +126,16 @@ model Question {
   updatedAt          DateTime           @updatedAt
 }
 
+model DailyQuiz {
+  id          String    @id @default(cuid())
+  userId      String
+  score       Float
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  submittedAt DateTime?
+}
+
 model User {
   id              String   @id
   name            String
@@ -129,8 +155,8 @@ model User {
   banExpires DateTime?
 
   // Students
-  joinedTrack     Track?           @relation(fields: [trackId], references: [id], onDelete: Cascade, name: "joinedTrack")
   trackId         String?
+  joinedTrack     Track?           @relation(fields: [trackId], references: [id], onDelete: Cascade, name: "joinedTrack")
   userCompletions UserCompletion[]
 
   // Instructors
@@ -138,6 +164,8 @@ model User {
   createdTopics      Topic[]
   createdQuestions   Question[]
   instructorOfTracks TrackInstructor[]
+  topicPerformances  UserTopicPerformance[]
+  dailyQuizzes       DailyQuiz[]
 
   @@unique([email])
   @@map("user")

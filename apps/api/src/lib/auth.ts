@@ -21,6 +21,20 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true
     },
+    user: {
+        additionalFields: {
+            discordUsername: {
+                type: "string",
+                required: true,
+                returned: true,
+            },
+            trackId: {
+                type: "string",
+                required: false,
+                returned: true,
+            }
+        }
+    },
     appName: "api",
     plugins: [
         openAPI(),
