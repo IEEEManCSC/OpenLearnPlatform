@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup-windows": "python -m venv .venv && .venv\\Scripts\\activate && pip install -r requirements.txt",
+    "setup-linux": "python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt",
+    "lint": "node bin/lint.js",
+    "dev": "node bin/dev.js"
   },
   "keywords": [],
   "author": "",

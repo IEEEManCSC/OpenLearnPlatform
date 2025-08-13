@@ -1,6 +1,5 @@
 from typing import List, Optional
 from models.schemas import Available, UserProgress, ProgressByLevel
-from config.settings import settings
 
 
 class MasteryCalculator:
