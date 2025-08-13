@@ -1,23 +1,22 @@
 import { FaAward } from "react-icons/fa6";
-import Linegb from '../../../public/linebg.svg?react'
+import Linegb from "../../../public/linebg.svg?react";
 function Rank() {
-    return (
-        <div className='bg-lightOrange rounded-3xl h-[218px] border-2 border-orange-100 w-full'>
-            <Linegb width="100%" className="rounded-3xl" preserveAspectRatio="none" />
-            <div className="-mt-20 w-3/4 m-auto py-8">
-                <p className="text-IEEEorange font-semibold text-2xl">Rank</p>
-                <div className="text-IEEEorange text-5xl font-semibold mt-5 w-fit m-auto">
-                    44
-                    <sub className="text-orange-300 font-normal"> /50 </sub>
-                </div>
-                <div className="flex items-center justify-center my-5 text-IEEEorange gap-1 text-xl">
-                    <FaAward className="text-2xl" />
-                    <p>Top 8% of students</p>
-                </div>
-            </div>
-
+  return (
+    <div className="bg-lightOrange h-[218px] w-full rounded-3xl border-2 border-orange-100">
+      <Linegb width="100%" className="rounded-3xl" preserveAspectRatio="none" />
+      <div className="m-auto -mt-20 w-3/4 py-8">
+        <p className="text-IEEEorange text-2xl font-semibold">Rank</p>
+        <div className="text-IEEEorange m-auto mt-5 w-fit text-5xl font-semibold">
+          44
+          <sub className="font-normal text-orange-300"> /50 </sub>
         </div>
-    )
+        <div className="text-IEEEorange my-5 flex items-center justify-center gap-1 text-xl">
+          <FaAward className="text-2xl" />
+          <p>Top 8% of students</p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Rank
+export default Rank;

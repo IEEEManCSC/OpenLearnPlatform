@@ -17,7 +17,7 @@ function renderApp(initialEntries: string[] = ["/"]) {
       <MemoryRouter initialEntries={initialEntries}>
         <AppRouter />
       </MemoryRouter>
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 }
 
@@ -32,7 +32,7 @@ describe("AppRouter (inline setup)", () => {
     renderApp(["/login"]);
     // replace with something your Login component actually renders:
     expect(
-      screen.getByRole("button", { name: /sign in/i })
+      screen.getByRole("button", { name: /sign in/i }),
     ).toBeInTheDocument();
   });
 
@@ -42,7 +42,7 @@ describe("AppRouter (inline setup)", () => {
     // assuming MainLayout has a <Link to="/login">Login</Link>
     await user.click(screen.getByRole("link", { name: /login/i }));
     expect(
-      screen.getByRole("heading", { name: /sign in/i })
+      screen.getByRole("heading", { name: /sign in/i }),
     ).toBeInTheDocument();
   });
 

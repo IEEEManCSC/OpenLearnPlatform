@@ -1,21 +1,21 @@
-import { LuChartNoAxesColumn } from 'react-icons/lu';
-import ProgressBar from '../global/ProgressBar';
+import { LuChartNoAxesColumn } from "react-icons/lu";
+import ProgressBar from "../global/ProgressBar";
 
 const ProgressRate = () => {
   const fakeProg = [
     {
       progress: 40,
-      title: 'Course Completed',
+      title: "Course Completed",
       currentProg: 4,
     },
     {
       progress: 70,
-      title: 'Quizzes Completed',
+      title: "Quizzes Completed",
       currentProg: 12,
     },
     {
       progress: 40,
-      title: 'Topics Completed',
+      title: "Topics Completed",
       currentProg: 8,
     },
   ];
@@ -33,13 +33,13 @@ const ProgressRate = () => {
         <div key={item.title}>
           <div className="relative -my-2 flex items-center">
             <h3 className="text-secondary-gray pt-2 font-semibold">
-              {' '}
-              {item.title}{' '}
+              {" "}
+              {item.title}{" "}
             </h3>
             <span className="text-IEEEorange absolute top-2.5 right-0 text-sm font-semibold">
-              {' '}
-              {item.currentProg}{' '}
-              <sub className="text-secondary-gray font-normal"> /15 </sub>{' '}
+              {" "}
+              {item.currentProg}{" "}
+              <sub className="text-secondary-gray font-normal"> /15 </sub>{" "}
             </span>
           </div>
           <ProgressBar
@@ -48,7 +48,7 @@ const ProgressRate = () => {
             key={item.title}
             hideLabel={true}
             height={8}
-            bgColor={'fff6e6'}
+            bgColor={"fff6e6"}
           />
         </div>
       ))}

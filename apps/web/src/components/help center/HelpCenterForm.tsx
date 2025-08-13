@@ -34,8 +34,8 @@ const HelpCenterForm = () => {
   };
 
   return (
-    <section className="max-sm:px-8  sm:w-[78%]  w-full bg-white ">
-      <div className="p-3 text-xl font-bold mb-8 w-full max-sm:text-sm   bg-lightOrange">
+    <section className="w-full bg-white max-sm:px-8 sm:w-[78%]">
+      <div className="bg-lightOrange mb-8 w-full p-3 text-xl font-bold max-sm:text-sm">
         <h2>Contact Us</h2>
       </div>
       <div className="px-3">
@@ -46,10 +46,10 @@ const HelpCenterForm = () => {
               name="fullname"
               render={({ field }) => (
                 <FormItem className="pb-4">
-                  <Label className="text-IEEEorange ps-1 sm:text-lg ">
+                  <Label className="text-IEEEorange ps-1 sm:text-lg">
                     Full name
                   </Label>
-                  <FormControl className="py-5  max-sm:py-3 focus-visible:ring-lightOrange focus:border-0">
+                  <FormControl className="focus-visible:ring-lightOrange py-5 focus:border-0 max-sm:py-3">
                     <Input
                       className="placeholder:text-PlaceHolderGray max-sm:placeholder:text-sm"
                       placeholder="Enter your fullname"
@@ -65,10 +65,10 @@ const HelpCenterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem className="pb-4">
-                  <Label className="text-IEEEorange ps-1 sm:text-lg ">
+                  <Label className="text-IEEEorange ps-1 sm:text-lg">
                     Email address
                   </Label>
-                  <FormControl className="py-5 max-sm:py-3 focus-visible:ring-lightOrange focus:border-0">
+                  <FormControl className="focus-visible:ring-lightOrange py-5 focus:border-0 max-sm:py-3">
                     <Input
                       className="placeholder:text-PlaceHolderGray max-sm:placeholder:text-sm"
                       placeholder="email@example.com"
@@ -84,12 +84,12 @@ const HelpCenterForm = () => {
               name="message"
               render={({ field }) => (
                 <FormItem className="pb-4">
-                  <Label className="text-IEEEorange ps-1 sm:text-lg ">
+                  <Label className="text-IEEEorange ps-1 sm:text-lg">
                     Subject
                   </Label>
-                  <FormControl className="py-5 max-sm:py-3 focus-visible:ring-lightOrange focus:border-0">
+                  <FormControl className="focus-visible:ring-lightOrange py-5 focus:border-0 max-sm:py-3">
                     <Textarea
-                      className="placeholder:text-PlaceHolderGray max-sm:placeholder:text-sm min-h-[150px] "
+                      className="placeholder:text-PlaceHolderGray min-h-[150px] max-sm:placeholder:text-sm"
                       placeholder="Type your message here"
                       {...field}
                     />
@@ -101,7 +101,7 @@ const HelpCenterForm = () => {
 
             <Button
               type="submit"
-              className="cursor-pointer font-bold text-lg px-12 rounded-md py-6 max-sm:px-8 max-sm:py-3 max-sm:text-sm "
+              className="cursor-pointer rounded-md px-12 py-6 text-lg font-bold max-sm:px-8 max-sm:py-3 max-sm:text-sm"
               variant={"default"}
             >
               Send

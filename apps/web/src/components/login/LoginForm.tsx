@@ -50,9 +50,9 @@ function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 lg:w-md lg:ms-40 w-3/4"
+        className="w-3/4 space-y-8 lg:ms-40 lg:w-md"
       >
-        <div className="font-bold text-3xl p-2 border-b-[3px] rounded-b-sm border-b-IEEEorange text-IEEEorange">
+        <div className="border-b-IEEEorange text-IEEEorange rounded-b-sm border-b-[3px] p-2 text-3xl font-bold">
           Login
         </div>
 
@@ -82,7 +82,7 @@ function LoginForm() {
                       id={f.name}
                       placeholder={f.placeholder}
                       {...field}
-                      className="p-6 ps-10 placeholder:text-lg focus-visible:ring-amber-100 focus:border-0"
+                      className="p-6 ps-10 placeholder:text-lg focus:border-0 focus-visible:ring-amber-100"
                     />
                   </div>
                 </FormControl>
@@ -99,7 +99,7 @@ function LoginForm() {
               control={form.control}
               name="terms"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-2 space-y-0">
+                <FormItem className="flex flex-row items-start space-y-0 space-x-2">
                   <FormControl>
                     <Checkbox
                       id="terms"
@@ -107,12 +107,12 @@ function LoginForm() {
                       onCheckedChange={(checked) =>
                         field.onChange(checked === true)
                       }
-                      className="w-5 h-5 data-[state=checked]:!bg-IEEEorange data-[state=checked]:border-IEEEorange"
+                      className="data-[state=checked]:!bg-IEEEorange data-[state=checked]:border-IEEEorange h-5 w-5"
                     />
                   </FormControl>
                   <Label
                     htmlFor="terms"
-                    className="text-IEEEorange font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-IEEEorange leading-none font-bold peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Remember me
                   </Label>
@@ -120,7 +120,7 @@ function LoginForm() {
               )}
             />
           </div>
-          <Label className="border-b-2 border-b-IEEEorange text-IEEEorange font-bold pb-2">
+          <Label className="border-b-IEEEorange text-IEEEorange border-b-2 pb-2 font-bold">
             Forget password?
           </Label>
         </div>
@@ -128,7 +128,7 @@ function LoginForm() {
         {/* submit button */}
         <Button
           type="submit"
-          className="w-full bg-IEEEorange hover:bg-IEEEorange p-5 text-lg"
+          className="bg-IEEEorange hover:bg-IEEEorange w-full p-5 text-lg"
         >
           Login
         </Button>

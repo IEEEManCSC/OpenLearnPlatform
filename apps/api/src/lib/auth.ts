@@ -6,47 +6,47 @@ import { createAccessControl } from "better-auth/plugins/access";
 import { defaultStatements, adminAc } from "better-auth/plugins/admin/access";
 
 const statements = {
-    ...defaultStatements,
-    platform: ["use"],
+  ...defaultStatements,
+  platform: ["use"],
 } as const;
 
 const ac = createAccessControl(statements);
-const studentRole = ac.newRole({ platform: ['use'] });
+const studentRole = ac.newRole({ platform: ["use"] });
 const instructorRole = ac.newRole({ ...adminAc.statements });
 
 export const auth = betterAuth({
-    database: prismaAdapter(prisma, {
-        provider: "postgresql",
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }),
+  emailAndPassword: {
+    enabled: true,
+  },
+  user: {
+    additionalFields: {
+      discordUsername: {
+        type: "string",
+        required: true,
+        returned: true,
+      },
+      trackId: {
+        type: "string",
+        required: false,
+        returned: true,
+      },
+    },
+  },
+  appName: "api",
+  plugins: [
+    openAPI(),
+    bearer(),
+    jwt(),
+    admin({
+      ac,
+      roles: {
+        student: studentRole,
+        instructor: instructorRole,
+      },
+      defaultRole: "student",
     }),
-    emailAndPassword: {
-        enabled: true
-    },
-    user: {
-        additionalFields: {
-            discordUsername: {
-                type: "string",
-                required: true,
-                returned: true,
-            },
-            trackId: {
-                type: "string",
-                required: false,
-                returned: true,
-            }
-        }
-    },
-    appName: "api",
-    plugins: [
-        openAPI(),
-        bearer(),
-        jwt(),
-        admin({
-            ac,
-            roles: {
-                student: studentRole,
-                instructor: instructorRole,
-            },
-            defaultRole: "student",
-        })
-    ],
+  ],
 });

@@ -1,62 +1,74 @@
-import Dashboard from '../../../public/icons/ri_dashboard-fill.svg?react'
-import Profile from '../../../public/icons/profile.svg?react'
-import Setting from '../../../public/icons/setting-2.svg?react'
-import Leader from '../../../public/icons/medal-star.svg?react'
-import Quiz from '../../../public/icons/note.svg?react'
-import Help from '../../../public/icons/help-center.svg?react'
-import Roadmap from '../../../public/icons/teacher.svg?react'
-import { Link } from 'react-router-dom'
+import Dashboard from "../../../public/icons/ri_dashboard-fill.svg?react";
+import Profile from "../../../public/icons/profile.svg?react";
+import Setting from "../../../public/icons/setting-2.svg?react";
+import Leader from "../../../public/icons/medal-star.svg?react";
+import Quiz from "../../../public/icons/note.svg?react";
+import Help from "../../../public/icons/help-center.svg?react";
+import Roadmap from "../../../public/icons/teacher.svg?react";
+import { Link } from "react-router-dom";
 
 const sidebarTop = [
-    { icon: Dashboard, txt: 'Dashboard', path: '' },
-    { icon: Roadmap, txt: 'Roadmap', path: 'roadmap' },
-    { icon: Leader, txt: 'Leaderboard', path: 'leader' },
-    { icon: Quiz, txt: 'Quizs', path: 'quiz' },
-    { icon: Profile, txt: 'Profile', path: 'profile' },
-]
+  { icon: Dashboard, txt: "Dashboard", path: "" },
+  { icon: Roadmap, txt: "Roadmap", path: "roadmap" },
+  { icon: Leader, txt: "Leaderboard", path: "leader" },
+  { icon: Quiz, txt: "Quizs", path: "quiz" },
+  { icon: Profile, txt: "Profile", path: "profile" },
+];
 const sidebarBottom = [
-    { icon: Setting, txt: 'Settings',path:'setting' },
-    { icon: Help, txt: 'Help Center',path:'help' },
-]
+  { icon: Setting, txt: "Settings", path: "setting" },
+  { icon: Help, txt: "Help Center", path: "help" },
+];
 
 type proptype = {
-    setActiveLink: React.Dispatch<React.SetStateAction<string>>,
-    activeLink: string,
-    mobile:boolean
+  setActiveLink: React.Dispatch<React.SetStateAction<string>>;
+  activeLink: string;
+  mobile: boolean;
+};
+
+function Sidebar({ activeLink, setActiveLink, mobile = false }: proptype) {
+  return (
+    <div
+      className={`${!mobile ? "hidden" : "mt-14 flex"} fixed h-[550px] flex-col justify-between rounded-se-[3rem] rounded-ee-[3rem] bg-white p-8 text-xl font-semibold text-zinc-400 sm:flex`}
+    >
+      <div className="space-y-2">
+        {sidebarTop.map((e) => {
+          const Icon = e.icon;
+          return (
+            <Link
+              to={`/${e.path}`}
+              key={e.txt}
+              className={` ${mobile && "rounded-2xl"} flex gap-3 rounded-e-2xl p-3 ${activeLink === e.txt ? "text-IEEEorange bg-lightOrange" : "cursor-pointer text-zinc-400"}`}
+              onClick={() => setActiveLink(e.txt)}
+            >
+              <Icon className="shrink-0" />
+              <p className={`${!mobile && "hidden"} capitalize lg:block`}>
+                {e.txt}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+      <div className="space-y-2">
+        <hr className="border-2" />
+        {sidebarBottom.map((e) => {
+          const Icon = e.icon;
+          return (
+            <Link
+              to={`/${e.path}`}
+              className={`${mobile && "rounded-2xl"} flex gap-3 p-3 ${activeLink === e.txt ? "text-IEEEorange bg-lightOrange rounded-e-2xl" : "cursor-pointer text-zinc-400"}`}
+              onClick={() => setActiveLink(e.txt)}
+              key={e.txt}
+            >
+              <Icon className="shrink-0" />
+              <p className={`${!mobile && "hidden"} capitalize lg:block`}>
+                {e.txt}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
-function Sidebar({ activeLink, setActiveLink,mobile=false }: proptype) {
-    return (
-        <div className={`${!mobile?'hidden':'flex mt-14 '} fixed  sm:flex bg-white text-xl text-zinc-400 font-semibold h-[550px] rounded-ee-[3rem] rounded-se-[3rem] p-8 flex-col justify-between`}>
-            <div className="space-y-2">
-                {
-                    sidebarTop.map(e => {
-                        const Icon = e.icon
-                        return (
-                            <Link to={`/${e.path}`} key={e.txt} className={` ${mobile&&'rounded-2xl'} flex gap-3 p-3 rounded-e-2xl ${activeLink === e.txt ? 'text-IEEEorange bg-lightOrange' : 'text-zinc-400 cursor-pointer'}`} onClick={() => setActiveLink(e.txt)}>
-                                <Icon className='shrink-0' />
-                                <p className={`${!mobile&&'hidden'} capitalize lg:block`}>{e.txt}</p>
-                            </Link>
-                        )
-                    })
-                }
-            </div>
-            <div className="space-y-2">
-                <hr className="border-2" />
-                {
-                    sidebarBottom.map(e => {
-                        const Icon = e.icon
-                        return (
-                            <Link to={`/${e.path}`} className={`${mobile&&'rounded-2xl'} flex gap-3 p-3 ${activeLink === e.txt ? 'text-IEEEorange rounded-e-2xl bg-lightOrange' : 'text-zinc-400 cursor-pointer'}`} onClick={() => setActiveLink(e.txt)} key={e.txt}>
-                                <Icon className='shrink-0'/>
-                                <p className={`${!mobile&&'hidden'} capitalize lg:block`}>{e.txt}</p>
-                            </Link>
-                        )
-                    })
-                }
-            </div>
-        </div>
-    )
-}
-
-export default Sidebar
+export default Sidebar;
