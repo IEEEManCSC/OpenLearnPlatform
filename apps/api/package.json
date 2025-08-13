@@ -19,6 +19,7 @@
     "@prisma/client": "6.11.1",
     "@tiptap/extension-horizontal-rule": "2.1.13",
     "adminjs": "^7.8.17",
+    "axios": "^1.11.0",
     "better-auth": "^1.2.12",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
