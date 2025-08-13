@@ -4,7 +4,7 @@ import { auth } from "./lib/auth.js";
 import { toNodeHandler } from "better-auth/node";
 import { admin, adminRouter } from "./lib/admin.js";
 
-const app = express();
+const app = express()
 
 app.disable("x-powered-by");
 
