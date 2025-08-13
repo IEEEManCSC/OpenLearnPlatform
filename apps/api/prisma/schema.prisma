@@ -66,6 +66,10 @@ model Topic {
   userCompletions   UserCompletion[]
   questions         Question[]
   userPerformances  UserTopicPerformance[]
+  
+  difficulty        QuestionDifficulty              @default(easy) 
+  attempted         Int              @default(0)
+  solved            Int              @default(0)
 }
 
 model UserCompletion {
@@ -134,6 +138,9 @@ model DailyQuiz {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   submittedAt DateTime?
+  totalQuestions Int @default(10)
+
+  @@unique([userId, createdAt])
 }
 
 model User {
@@ -226,3 +233,4 @@ model Jwks {
 
   @@map("jwks")
 }
+
