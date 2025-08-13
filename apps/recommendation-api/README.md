@@ -92,8 +92,8 @@ Generate question recommendations based on user data.
     {
       "topic": "Math",
       "available": [
-        {"level": 1, "count": 20},
-        {"level": 3, "count": 10}
+        { "level": 1, "count": 20 },
+        { "level": 3, "count": 10 }
       ]
     }
   ],
@@ -101,8 +101,8 @@ Generate question recommendations based on user data.
     {
       "topic": "Math",
       "progressByLevel": [
-        {"level": 1, "solved": 8, "attempted": 10},
-        {"level": 3, "solved": 3, "attempted": 5}
+        { "level": 1, "solved": 8, "attempted": 10 },
+        { "level": 3, "solved": 3, "attempted": 5 }
       ]
     }
   ]
@@ -117,8 +117,8 @@ Generate question recommendations based on user data.
     {
       "name": "Math",
       "recommendations": [
-        {"level": 1, "count": 6},
-        {"level": 3, "count": 4}
+        { "level": 1, "count": 6 },
+        { "level": 3, "count": 4 }
       ]
     }
   ],
