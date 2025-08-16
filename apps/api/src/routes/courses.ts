@@ -45,13 +45,15 @@ router.get(
       req.params.courseId,
     );
 
+    // const completedTopicsSet = new Set(completedTopics)
     let filterdTopics;
     if (completed === "true") {
       filterdTopics = completedTopics;
     } else if (completed === "false") {
-      const completedTopicsIds = completedTopics.map((ele) => ele.topic.id);
+      const completedTopicsIdsSet = new Set();
+      completedTopics.forEach((ele) => completedTopicsIdsSet.add(ele));
       const unCompletedTopics = totalTopics.filter(
-        (ele) => !completedTopicsIds.includes(ele.id),
+        (ele) => !completedTopicsIdsSet.has(ele.id),
       );
       filterdTopics = unCompletedTopics;
     } else {
