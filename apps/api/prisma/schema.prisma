@@ -49,6 +49,7 @@ model Course {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   topics      Topic[]
+  notes       Note[]
 }
 
 model Topic {
@@ -66,6 +67,24 @@ model Topic {
   userCompletions   UserCompletion[]
   questions         Question[]
   userPerformances  UserTopicPerformance[]
+  notes             Note[]
+}
+
+model Note {
+  id      String @id @default(cuid())
+  title   String
+  content String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // --- Relations ---
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topicId  String
+  topic    Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }
 
 model UserCompletion {
@@ -158,6 +177,7 @@ model User {
   trackId         String?
   joinedTrack     Track?           @relation(fields: [trackId], references: [id], onDelete: Cascade, name: "joinedTrack")
   userCompletions UserCompletion[]
+  notes           Note[]
 
   // Instructors
   createdTracks      Track[]
