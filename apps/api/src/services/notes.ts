@@ -1,7 +1,5 @@
 import { NotFoundError } from "../errors/not-found.js";
-import PermissionDenied from "../errors/permission-denied.js";
-import { Note, Prisma } from "../generated/prisma/client.js";
-import { Not } from "../generated/prisma/internal/prismaNamespace.js";
+import { Prisma } from "../generated/prisma/client.js";
 import { prisma } from "../lib/prisma.js";
 import {
   CreateNoteBodyType,

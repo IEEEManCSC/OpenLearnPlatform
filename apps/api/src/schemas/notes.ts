@@ -5,12 +5,9 @@ export const CreateNoteBodySchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Title is required and must be at least 1 character." }),
-  content: z
-    .string()
-    .trim()
-    .min(1, {
-      message: "Content is required and must be at least 1 character.",
-    }),
+  content: z.string().trim().min(1, {
+    message: "Content is required and must be at least 1 character.",
+  }),
 });
 
 export const NoteSchema = z.object({
@@ -40,14 +37,14 @@ export const UpdateNoteBodySchema = z.object({
 });
 
 // valitate query string
-const validSortFields = [
+const validSortFields = new Set([
   "title",
   "-title",
   "createdAt",
   "-createdAt",
   "updatedAt",
   "-updatedAt",
-];
+]);
 
 export const GetAllNotesQuerySchema = z.object({
   courseId: z
@@ -64,9 +61,7 @@ export const GetAllNotesQuerySchema = z.object({
     .refine(
       (value) => {
         // Ensure every comma-separated value is in whitelist
-        return value
-          .split(",")
-          .every((field) => validSortFields.includes(field));
+        return value.split(",").every((field) => validSortFields.has(field));
       },
       { message: `Invalid sort field.` },
     )
