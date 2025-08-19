@@ -3,7 +3,7 @@ import { validate } from "../middlewares/validate.js";
 import { requireAuth } from "../middlewares/auth.js";
 import { submitDailyQuizBodySchema } from "../schemas/quizzes.js";
 import { getQuiz, submitQuiz } from "../controller/quiz.controller.js";
-import { getQuizSubmissionCalendar } from "../controller/calender.controller.js";
+import { getQuizSubmissionCalendar } from "../controller/calendar.controller.js";
 
 const router = Router();
 
