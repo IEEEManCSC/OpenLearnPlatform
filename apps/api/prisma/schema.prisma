@@ -139,8 +139,9 @@ model DailyQuiz {
   updatedAt   DateTime  @updatedAt
   submittedAt DateTime?
   totalQuestions Int @default(10)
+  quizDate    DateTime  // Should be set to the date (midnight) of the quiz, without time component
 
-  @@unique([userId, createdAt])
+  @@unique([userId, quizDate])
 }
 
 model User {
