@@ -2,8 +2,9 @@ import axios from "axios";
 
 export const fetchAiRecommendation = async (quizData: any) => {
   try {
+    const aiApiUrl = process.env.AI_API_URL || "http://localhost:5000/api/data";
     const response = await axios.post(
-      "http://localhost:5000/api/data",
+      aiApiUrl,
       quizData
     );
     return response.data;
