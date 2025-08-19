@@ -19,6 +19,8 @@ export interface GradeQuizResult {
   scorePercentage: number; // 0-100
 }
 
+const INVALID_QUESTION_INDEX = -1;
+
 /**
  * Grades a batch of answers. Missing or invalid questions are ignored but still counted toward total if they existed in input.
  */
@@ -53,7 +55,7 @@ export const gradeAnswers = async (
       return {
         questionId: a.questionId,
         userChoiceIndex: a.choiceIndex ?? null,
-        correctOptionIndex: -1,
+        correctOptionIndex: INVALID_QUESTION_INDEX,
         isCorrect: false,
       };
     }
