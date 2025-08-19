@@ -3,6 +3,7 @@ import express from "express";
 import { auth } from "./lib/auth.js";
 import { toNodeHandler } from "better-auth/node";
 import { admin, adminRouter } from "./lib/admin.js";
+import { quizzesRouter } from "./routes/quizzes.js";
 import api from "./routes/index.js";
 import { notesRouter } from "./routes/notes.js";
 
@@ -12,8 +13,12 @@ app.disable("x-powered-by");
 app.all("/api/auth/*", toNodeHandler(auth));
 app.use(admin.options.rootPath, adminRouter);
 console.log(`AdminJS is running under ${admin.options.rootPath}`);
+
 app.use(express.json());
+
 app.use(notesRouter);
 app.use("/api", api);
+app.use("/api/quizzes", quizzesRouter);
+
 
 export default app;

@@ -67,6 +67,12 @@ model Topic {
   userCompletions   UserCompletion[]
   questions         Question[]
   userPerformances  UserTopicPerformance[]
+
+  
+  difficulty        QuestionDifficulty              @default(easy) 
+  attempted         Int              @default(0)
+  solved            Int              @default(0)
+
   notes             Note[]
 }
 
@@ -85,6 +91,7 @@ model Note {
   topic    Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
   courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
 }
 
 model UserCompletion {
@@ -153,6 +160,10 @@ model DailyQuiz {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   submittedAt DateTime?
+  totalQuestions Int @default(10)
+  quizDate    DateTime  // Should be set to the date (midnight) of the quiz, without time component
+
+  @@unique([userId, quizDate])
 }
 
 model User {
@@ -246,3 +257,4 @@ model Jwks {
 
   @@map("jwks")
 }
+

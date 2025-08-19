@@ -1,23 +1,29 @@
 import { Router } from "express";
 import { validate } from "../middlewares/validate.js";
+import { requireAuth } from "../middlewares/auth.js";
 import { submitDailyQuizBodySchema } from "../schemas/quizzes.js";
+import { getQuiz, submitQuiz } from "../controller/quiz.controller.js";
+import { getQuizSubmissionCalendar } from "../controller/calendar.controller.js";
 
 const router = Router();
 
-router.get("/monthly-stats", (req, res) => {
-  res.send(req.url);
-});
+// Calendar of submissions (month view)
+router.get(
+  "/calendar",
+  requireAuth,
+  // optional validation for query could be added later
+  getQuizSubmissionCalendar
+);
 
-router.get("/daily", (req, res) => {
-  res.send(req.url);
-});
+// Fetch / (re)generate today's quiz for the user
+router.get("/daily", requireAuth, getQuiz);
 
+// Submit answers for today's quiz
 router.post(
   "/daily",
+  requireAuth,
   validate({ body: submitDailyQuizBodySchema }),
-  (req, res) => {
-    res.send(req.url);
-  },
+  submitQuiz
 );
 
 export { router as quizzesRouter };
