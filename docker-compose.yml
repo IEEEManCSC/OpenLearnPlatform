@@ -1,0 +1,108 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      cache_from:
+        - openlearnplatform-web:cache
+      target: production
+    ports:
+      - "20251:5173"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=http://api:3000
+      - VITE_RECOMMENDATION_API_URL=http://recommendation-api:8000
+    depends_on:
+      - api
+      - recommendation-api
+    networks:
+      - openlearn-network
+    volumes:
+      - web-node-modules:/app/node_modules
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      cache_from:
+        - openlearnplatform-api:cache
+      target: production
+    ports:
+      - "20252:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - openlearn-network
+    volumes:
+      - api-node-modules:/app/node_modules
+      - api-dist:/app/dist
+    restart: unless-stopped
+
+  recommendation-api:
+    build:
+      context: ./apps/recommendation-api
+      dockerfile: Dockerfile
+      cache_from:
+        - openlearnplatform-recommendation-api:cache
+      target: production
+    ports:
+      - "20253:8000"
+    environment:
+      - PYTHONPATH=/app
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=false
+    networks:
+      - openlearn-network
+    volumes:
+      - recommendation-api-venv:/app/.venv
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-openlearn}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - openlearn-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - openlearn-network
+    restart: unless-stopped
+
+networks:
+  openlearn-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  web-node-modules:
+  api-node-modules:
+  api-dist:
+  recommendation-api-venv:
