@@ -41,12 +41,15 @@ COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/src/generated ./src/generated
 
+# Copy node_modules from build stage to get Prisma CLI
+COPY --from=build /app/node_modules ./node_modules
+
+COPY --from=build /app/start.sh ./start.sh
+RUN chmod +x start.sh
+
 RUN chown -R nodejs:nodejs /app
 USER nodejs
 
 EXPOSE 3000
-
-COPY --from=build /app/start.sh ./start.sh
-RUN chmod +x start.sh
 
 CMD ["./start.sh"]
