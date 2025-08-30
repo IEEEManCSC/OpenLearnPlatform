@@ -68,11 +68,6 @@ model Topic {
   questions         Question[]
   userPerformances  UserTopicPerformance[]
 
-  
-  difficulty        QuestionDifficulty              @default(easy) 
-  attempted         Int              @default(0)
-  solved            Int              @default(0)
-
   notes             Note[]
 }
 

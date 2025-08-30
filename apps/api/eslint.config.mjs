@@ -29,6 +29,7 @@ export default [
       "sonarjs/no-hardcoded-passwords": "off",
       "sonarjs/cors": "off",
       "@typescript-eslint/no-namespace": "off",
+      "unicorn/no-useless-undefined": "off",
     },
     languageOptions: {
       globals: globals.node,

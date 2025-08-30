@@ -34,14 +34,14 @@ export const getCompletedTopics = async (userId: string, courseId: string) => {
 };
 
 export const getCourses = async (
-  levelId: string,
+  levelId: string | undefined,
   trackId: string,
   userId: string,
 ) => {
-  return await prisma.course.findMany({
+  const courses = await prisma.course.findMany({
     where: {
       trackId,
-      ...(levelId && { levelId }),
+      levelId,
     },
     orderBy: {
       order: "asc",
@@ -57,5 +57,18 @@ export const getCourses = async (
         },
       },
     },
+  });
+
+  return courses.map((course) => {
+    const totalTopics = course.topics.length;
+    const completedTopics = course.topics.filter(
+      (topic) => topic.userCompletions.length > 0,
+    ).length;
+    const completedPercentage = (completedTopics / totalTopics) * 100;
+
+    return {
+      ...course,
+      completedPercentage,
+    };
   });
 };

@@ -1,39 +1,43 @@
-import exprees from "express";
-const router = exprees.Router();
+import { Router } from "express";
 import { validate } from "../middlewares/validate.js";
 import { getTopicParamsSchema } from "../schemas/topics.js";
-import * as Service from "../services/topics.js";
 import { requireAuth } from "../middlewares/auth.js";
+import {
+  markTopicAsCompleted,
+  getTopic,
+  unmarkTopicAsCompleted,
+} from "../services/topics.js";
+
+const router = Router();
 
 router.get(
   "/:topicId",
+  requireAuth,
   validate({ params: getTopicParamsSchema }),
   async (req, res) => {
-    const topic = await Service.getTopic(req.params.topicId);
+    const topic = await getTopic(req.params.topicId);
 
-    res.status(200).json({
-      topic,
-    });
+    res.enhancedSend(200, topic);
   },
 );
+
 router.post(
   "/:topicId/completion",
   requireAuth,
   validate({ params: getTopicParamsSchema }),
   async (req, res) => {
-    const topic = await Service.completeTopic(req.user!.id, req.params.topicId);
-    res.status(201).json({
-      topic,
-    });
+    const topic = await markTopicAsCompleted(req.user!.id, req.params.topicId);
+    res.enhancedSend(201, topic);
   },
 );
+
 router.delete(
   "/:topicId/completion",
   requireAuth,
   validate({ params: getTopicParamsSchema }),
   async (req, res) => {
-    await Service.inCompleteTopic(req.user!.id, req.params.topicId);
-    res.status(204).json({});
+    await unmarkTopicAsCompleted(req.user!.id, req.params.topicId);
+    res.enhancedSend(204, undefined);
   },
 );
 

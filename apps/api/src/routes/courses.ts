@@ -22,15 +22,17 @@ router.get(
       req.user!.id,
       req.params.courseId,
     );
-    const persentage = (completedTopics.length / totalTopics.length) * 100;
+    const completedPercentage =
+      (completedTopics.length / totalTopics.length) * 100;
 
-    res.status(200).json({
-      course,
-      totalTopics,
-      persentage,
+    res.enhancedSend(200, {
+      ...course,
+      topics: totalTopics,
+      completedPercentage,
     });
   },
 );
+
 router.get(
   "/:courseId/topics",
   requireAuth,
@@ -38,32 +40,14 @@ router.get(
   async (req, res) => {
     const { completed } = req.query;
 
-    const totalTopics = await topicService.getToltalTopics(req.params.courseId);
-
-    const completedTopics = await topicService.getCompletedTopics(
-      req.user!.id,
+    const topics = await topicService.getToltalTopics(
       req.params.courseId,
+      completed
+        ? { isCompleted: completed === "true", userId: req.user!.id }
+        : undefined,
     );
 
-    let filterdTopics;
-    if (completed === "true") {
-      filterdTopics = completedTopics;
-    } else if (completed === "false") {
-      const completedTopicsIds = new Set();
-      for (const topic of completedTopics) {
-        completedTopicsIds.add(topic.id);
-      }
-      const unCompletedTopics = totalTopics.filter(
-        (ele) => !completedTopicsIds.has(ele.id),
-      );
-      filterdTopics = unCompletedTopics;
-    } else {
-      filterdTopics = totalTopics;
-    }
-
-    res.status(200).json({
-      filterdTopics,
-    });
+    res.enhancedSend(200, topics);
   },
 );
 

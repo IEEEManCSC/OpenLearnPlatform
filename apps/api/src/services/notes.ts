@@ -1,30 +1,24 @@
 import { NotFoundError } from "../errors/not-found.js";
-import { Prisma } from "../generated/prisma/client.js";
+import { Note, Prisma } from "../generated/prisma/client.js";
 import { prisma } from "../lib/prisma.js";
 import {
   CreateNoteBodyType,
   GetAllNotesQueryType,
-  NoteServiceType,
   UpdateNoteServiceType,
 } from "../schemas/notes.js";
+import { Pagination } from "../schemas/pagination.js";
 
 interface PaginatedNotesResult {
-  pagination: {
-    totalNotes: number;
-    totalPages: number;
-    currentPage: number;
-    limit: number;
-  };
-  data: NoteServiceType[];
+  pagination: Pagination;
+  data: Note[];
 }
 
 export async function createNote(
   input: CreateNoteBodyType,
-  topicId: string,
   userId: string,
-): Promise<NoteServiceType> {
+): Promise<Note> {
   const topic = await prisma.topic.findUnique({
-    where: { id: topicId },
+    where: { id: input.topicId },
     select: { courseId: true },
   });
 
@@ -36,7 +30,7 @@ export async function createNote(
     data: {
       title: input.title,
       content: input.content,
-      topicId,
+      topicId: input.topicId,
       userId,
       courseId: topic.courseId,
     },
@@ -48,7 +42,7 @@ export async function createNote(
 export async function getNoteById(
   noteId: string,
   userId: string,
-): Promise<NoteServiceType> {
+): Promise<Note> {
   const note = await prisma.note.findFirst({
     where: {
       id: noteId,
@@ -67,7 +61,7 @@ export async function updateNote(
   noteId: string,
   userId: string,
   data: UpdateNoteServiceType,
-): Promise<NoteServiceType> {
+): Promise<Note> {
   const note = await prisma.note.findFirst({
     where: {
       id: noteId,
@@ -143,10 +137,10 @@ export async function getAllFilteredNotes(
 
   return {
     pagination: {
-      totalNotes: totalCount,
+      totalItems: totalCount,
       totalPages: Math.ceil(totalCount / limit),
       currentPage: page,
-      limit,
+      itemsPerPage: limit,
     },
     data: notes,
   };

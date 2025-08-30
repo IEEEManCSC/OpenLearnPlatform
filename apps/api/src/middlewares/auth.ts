@@ -12,7 +12,12 @@ declare global {
   }
 }
 
-export const requireAuth: RequestHandler = async (req, res, next) => {
+export const requireAuth: RequestHandler<
+  unknown,
+  unknown,
+  unknown,
+  unknown
+> = async (req, res, next) => {
   const data = await auth.api.getSession({
     headers: fromNodeHeaders(req.headers),
   });

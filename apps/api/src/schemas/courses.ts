@@ -5,5 +5,5 @@ export const getCourseParamsSchema = z.object({
 });
 
 export const getCourseQuerySchema = z.object({
-  completed: z.string().optional(),
+  completed: z.enum(["true", "false"]).optional(),
 });

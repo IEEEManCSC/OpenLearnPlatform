@@ -1,11 +1,11 @@
 import { prisma } from "../lib/prisma.js";
 
 export const fetchQuestionsByRecommendation = async (
-  aiRecommendation: any,
-  totalQuestions: number
+  aiRecommendation: { topics: { recommendations: { level: number }[] }[] },
+  totalQuestions: number,
 ) => {
-  const levelsToFetch = aiRecommendation.topics.flatMap((topic: any) =>
-    topic.recommendations.map((rec: any) => rec.level)
+  const levelsToFetch = aiRecommendation.topics.flatMap((topic) =>
+    topic.recommendations.map((rec) => rec.level),
   );
 
   return prisma.question.findMany({

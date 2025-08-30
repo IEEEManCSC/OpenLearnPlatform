@@ -1,3 +1,4 @@
+import { Prisma } from "../generated/prisma/client.js";
 import { prisma } from "../lib/prisma.js";
 
 export const getTopic = async (topicId: string) => {
@@ -13,7 +14,7 @@ export const getTopic = async (topicId: string) => {
   });
 };
 
-export const completeTopic = async (userId: string, topicId: string) => {
+export const markTopicAsCompleted = async (userId: string, topicId: string) => {
   return await prisma.userCompletion.create({
     data: {
       userId,
@@ -21,24 +22,39 @@ export const completeTopic = async (userId: string, topicId: string) => {
     },
   });
 };
-export const inCompleteTopic = async (userId: string, topicId: string) => {
-  prisma.userCompletion.delete({
+export const unmarkTopicAsCompleted = async (
+  userId: string,
+  topicId: string,
+) => {
+  return await prisma.userCompletion.delete({
     where: {
       userId_topicId: { userId, topicId },
     },
   });
 };
 
-export const getToltalTopics = async (courseId: string) => {
+export const getToltalTopics = async (
+  courseId: string,
+  completion?: { isCompleted: boolean; userId: string },
+) => {
+  const whereClause: Prisma.TopicWhereInput = { courseId };
+  if (completion?.isCompleted === true) {
+    whereClause.userCompletions = {
+      some: { userId: completion.userId },
+    };
+  } else if (completion?.isCompleted === false) {
+    whereClause.userCompletions = {
+      none: { userId: completion?.userId },
+    };
+  }
   return await prisma.topic.findMany({
-    where: {
-      courseId,
-    },
+    where: whereClause,
     orderBy: {
       order: "asc",
     },
   });
 };
+
 export const getCompletedTopics = async (userId: string, courseId: string) => {
   return await prisma.userCompletion.findMany({
     where: {
