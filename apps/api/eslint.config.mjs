@@ -1,21 +1,20 @@
 import globals from "globals";
 import jsPlugin from "@eslint/js";
 import tsPlugin from "typescript-eslint";
-import unicornPlugin from 'eslint-plugin-unicorn';
-import prettierConfig from 'eslint-config-prettier';
-import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
-import sonarjs from 'eslint-plugin-sonarjs';
-
+import unicornPlugin from "eslint-plugin-unicorn";
+// import prettierConfig from "eslint-config-prettier";
+// import prettierPluginRecommended from "eslint-plugin-prettier/recommended";
+import sonarjs from "eslint-plugin-sonarjs";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ["**/seed/**", "**/generated/**"]
+    ignores: ["**/seed/**", "**/generated/**"],
   },
   jsPlugin.configs.recommended,
-  unicornPlugin.configs['recommended'],
-  prettierPluginRecommended,
-  prettierConfig,
+  unicornPlugin.configs["recommended"],
+  // prettierPluginRecommended,
+  // prettierConfig,
   sonarjs.configs.recommended,
   ...tsPlugin.configs.recommended,
   {
@@ -33,6 +32,6 @@ export default [
     },
     languageOptions: {
       globals: globals.node,
-    }
-  }
+    },
+  },
 ];
