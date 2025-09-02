@@ -1,38 +1,8 @@
 import axiosInstance from "../config/axiosInstance";
+import { NotesListParams , Note } from "../modules/notes/notes.interface";
+import { Pagination } from "../modules/pagination/pagination.interface";
+import { ApiResponse } from "../modules/apiResponse/apiResponse.interface";
 
-export interface Note {
-  id: string;
-  title: string;
-  content: string;
-  topicId: string;
-  userId: string; // موجود في schema
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface NotesListParams {
-  courseId?: string;
-  topicId?: string;
-  search?: string;
-  sort?: string;
-  page?: number;
-  limit?: number;
-}
-
-export interface Pagination {
-  totalItems: number;
-  totalPages: number;
-  currentPage: number;
-  itemsPerPage: number;
-}
-
-export interface ApiResponse<T> {
-  success: boolean;
-  statusCode: number;
-  timestamp: string;
-  data: T;
-  pagination?: Pagination;
-}
 
 export const userService = {
   // 🟢 Get list
