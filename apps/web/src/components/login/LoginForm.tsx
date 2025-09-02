@@ -13,6 +13,7 @@ import { Label } from "@components/ui/label";
 import { Checkbox } from "@components/ui/checkbox";
 import { User, Lock } from "lucide-react";
 import { loginSchema } from "@/src/validation/loginSchema";
+import { login } from "../../services/authService";
 
 type FormValues = {
   username: string;
@@ -42,7 +43,7 @@ function LoginForm() {
   });
 
   const onSubmit = (data: FormValues) => {
-    console.log("Form Data:", data);
+    login(data.username, data.password);
     form.reset();
   };
 

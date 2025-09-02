@@ -1,5 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import Authenticator from "../lib/Authenticator";
+
 //layouts
 import MainLayout from "@layouts/MainLayout";
 
@@ -31,7 +33,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <MainLayout />,
+    element: (
+      <Authenticator>
+        <MainLayout />
+      </Authenticator>
+    ),
     children: [
       {
         index: true,
