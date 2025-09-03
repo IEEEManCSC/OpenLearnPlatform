@@ -7,21 +7,21 @@ import MainLayout from "@layouts/MainLayout";
 
 // Pages
 import Login from "@pages/Login";
-import Dashboard from "../../pages/Dashboard";
-import Roadmap from "../../pages/Roadmap";
-import LeaderBoard from "../../pages/LeaderBoard";
-import Quiz from "../../pages/Quiz";
-import Profile from "../../pages/Profile";
-import Settings from "../../pages/Settings";
-import Help from "../../pages/Help";
-import ChooseTrack from "../../pages/ChooseTrack";
-import Course from "../../pages/Course";
-import Topic from "../../pages/Topic";
-import Task from "../../pages/Task";
+import Dashboard from "../pages/Dashboard";
+import Roadmap from "../pages/Roadmap";
+import LeaderBoard from "../pages/LeaderBoard";
+import Quiz from "../pages/Quiz";
+import Profile from "../pages/Profile";
+import Settings from "../pages/Settings";
+import Help from "../pages/Help";
+import ChooseTrack from "../pages/ChooseTrack";
+import Course from "../pages/Course";
+import Topic from "../pages/Topic";
+import Task from "../pages/Task";
 
 // Router Functions
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AllNotes from "../../pages/AllNotes";
+import AllNotes from "../pages/AllNotes";
 
 const router = createBrowserRouter([
   {

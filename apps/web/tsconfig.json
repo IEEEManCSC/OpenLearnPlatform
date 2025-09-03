@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@pages/*": ["pages/*"],
+      "@pages/*": ["src/pages/*"],
       "@components/*": ["components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@hooks/*": ["src/hooks/*"],
@@ -32,6 +32,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "components", "pages"],
+  "include": ["src", "components", "src/pages"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
