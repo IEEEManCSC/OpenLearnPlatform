@@ -1,22 +1,6 @@
 import axiosInstance from "../config/axiosInstance";
-
-interface Topic {
-  id: string;
-  name: string;
-  content: string;
-  courseId: string;
-  order: number;
-  completed: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface ApiResponse<T> {
-  success: boolean;
-  statusCode: number;
-  timestamp: string;
-  data: T;
-}
+import { Topic } from "../modules/topics/topics.interface";
+import { ApiResponse } from "../modules/apiResponse/apiResponse.interface";
 
 export const topicsService = {
   // 🟢 Get by ID
