@@ -17,6 +17,8 @@ EXPOSE 5173
 CMD ["pnpm", "dev", "--host", "0.0.0.0"]
 
 FROM base AS build
+RUN echo "VITE_API_URL=${VITE_API_URL:-http://localhost:3000}" > .env && \
+    echo "VITE_RECOMMENDATION_API_URL=${VITE_RECOMMENDATION_API_URL:-http://localhost:8000}" >> .env
 RUN pnpm build
 
 FROM nginx:alpine AS production
