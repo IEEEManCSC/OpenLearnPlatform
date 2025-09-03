@@ -15,6 +15,9 @@ import { User, Lock } from "lucide-react";
 import { loginSchema } from "@/src/validation/loginSchema";
 import { login } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 type FormValues = {
   username: string;
@@ -44,11 +47,23 @@ function LoginForm() {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    login(data.username, data.password);
-    form.reset();
-  };
+  const onSubmit = async (data: FormValues) => {
+    try {
+      const res = await login(data.username, data.password);
 
+      if (res.data?.token) {
+        Cookies.set("token", res.data.token);
+        toast.success("Login successful 🎉");
+        navigate("/");
+        form.reset();
+      }
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+      const message =
+        error.response?.data?.message || "Login failed. Please try again.";
+      toast.error(message);
+    }
+  };
   return (
     <Form {...form}>
       <form
@@ -136,7 +151,7 @@ function LoginForm() {
           Login
         </Button>
         <Label
-          className="border-b-IEEEorange text-IEEEorange border-b-2 pb-2 font-bold"
+          className="border-b-IEEEorange text-IEEEorange cursor-pointer border-b-2 pb-2 font-bold"
           onClick={() => {
             navigate("/sign-up");
           }}

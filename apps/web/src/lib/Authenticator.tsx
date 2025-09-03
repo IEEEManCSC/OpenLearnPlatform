@@ -1,7 +1,6 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { Navigate, useLocation } from "react-router-dom";
-
 interface AuthenticatorProps {
   children: React.ReactNode;
 }
@@ -9,7 +8,6 @@ interface AuthenticatorProps {
 const Authenticator: React.FC<AuthenticatorProps> = ({ children }) => {
   const location = useLocation();
   const token = Cookies.get("token");
-
   const currentPath = location.pathname;
   const isOnAuthPage = currentPath.startsWith("/login");
 

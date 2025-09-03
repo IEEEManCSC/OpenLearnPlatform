@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { register } from "../services/authService";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 function ChooseTrack() {
   const { username, email, password, discordUsername } = useAuthStore();
@@ -29,13 +31,18 @@ function ChooseTrack() {
   const levels = ["Beginner", "Intermediate", "Advanced"];
   const [selected, setSelected] = useState("");
   const navigate = useNavigate();
-  const handeSubmit = async () => {
+
+  const handleSubmit = async () => {
     try {
-      // register(username, email, password, discordUsername, selected);
-      console.log(username, email, password, discordUsername, selected);
+      await register(username, email, password, discordUsername, selected);
+      toast.success("Registration successful 🎉");
       navigate("/login");
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+      const message =
+        error.response?.data?.message ||
+        "Registration failed. Please try again.";
+      toast.error(message);
     }
   };
   return (
@@ -94,7 +101,7 @@ function ChooseTrack() {
             <div
               className="bg-IEEEorange hidden h-10 w-10 cursor-pointer items-center justify-center rounded-full md:flex"
               onClick={() => {
-                handeSubmit();
+                // handeSubmit();
               }}
             >
               <ChevronRight color="white" />
@@ -103,7 +110,7 @@ function ChooseTrack() {
           <div
             className="flex cursor-pointer items-center justify-end md:hidden"
             onClick={() => {
-              handeSubmit();
+              handleSubmit();
             }}
           >
             <ChevronRight
