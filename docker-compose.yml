@@ -10,15 +10,11 @@ services:
       - "20251:5173"
     environment:
       - NODE_ENV=production
-      - VITE_API_URL=http://api:3000
-      - VITE_RECOMMENDATION_API_URL=http://recommendation-api:8000
     depends_on:
       - api
       - recommendation-api
     networks:
       - openlearn-network
-    volumes:
-      - web-node-modules:/app/node_modules
     restart: unless-stopped
 
   api:
@@ -41,9 +37,6 @@ services:
         condition: service_healthy
     networks:
       - openlearn-network
-    volumes:
-      - api-node-modules:/app/node_modules
-      - api-dist:/app/dist
     restart: unless-stopped
 
   recommendation-api:
@@ -62,8 +55,6 @@ services:
       - DEBUG=false
     networks:
       - openlearn-network
-    volumes:
-      - recommendation-api-venv:/app/.venv
     restart: unless-stopped
 
   postgres:
@@ -102,7 +93,3 @@ networks:
 volumes:
   postgres-data:
   redis-data:
-  web-node-modules:
-  api-node-modules:
-  api-dist:
-  recommendation-api-venv:
