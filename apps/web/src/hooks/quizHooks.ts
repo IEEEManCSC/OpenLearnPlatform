@@ -1,11 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { quizService } from "../services/quizesService";
 import {
-  quizService,
   QuizCalendar,
   DailyQuizResponse,
   QuizSubmitRequest,
   QuizSubmitResponse,
-} from "../services/quizesService";
+} from "../modules/quizes/quizes.interface";
 
 // ================== useQuizCalendar ==================
 export const useQuizCalendar = (courseId: string) => {

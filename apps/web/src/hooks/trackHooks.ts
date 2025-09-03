@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { trackService, Track } from "../services/tracksService";
-
+import { trackService } from "../services/tracksService";
+import { Track } from "../modules/tracks/tracks.interface";
 // 🔹 Hook: Get all tracks list
 export const useTracksList = () => {
   return useQuery<Track[]>({
