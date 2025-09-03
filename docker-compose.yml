@@ -10,8 +10,6 @@ services:
       - "20251:5173"
     environment:
       - NODE_ENV=production
-      - VITE_API_URL=http://api:3000
-      - VITE_RECOMMENDATION_API_URL=http://recommendation-api:8000
     depends_on:
       - api
       - recommendation-api
