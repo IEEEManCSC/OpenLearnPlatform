@@ -6,7 +6,7 @@ import DataEngineering from "../../public/trackIcons/Frame 1261156626.svg?react"
 import Embedded from "../../public/trackIcons/Mask group.svg?react";
 import Frontend from "../../public/trackIcons/html-5.svg?react";
 import Cyber from "../../public/trackIcons/security-safe.svg?react";
-import Frame from "../../public/trackIcons/Frametrack.svg?react";
+import frame from "../../public/trackIcons/Frametrack.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
@@ -27,7 +27,7 @@ function ChooseTrack() {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-50">
-      <Frame />
+      <img src={frame} alt="" />
       <div className="sm:10/12 m-auto w-11/12 text-xl sm:text-2xl lg:-mt-10 lg:w-2/3">
         <div>
           <p className="mb-5 text-center font-semibold">

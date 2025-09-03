@@ -1,8 +1,5 @@
-
 function LeaderBoard() {
-    return (
-        <div>LeaderBoard</div>
-    )
+  return <div>LeaderBoard</div>;
 }
 
-export default LeaderBoard
+export default LeaderBoard;

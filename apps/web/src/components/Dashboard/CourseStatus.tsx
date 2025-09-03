@@ -1,44 +1,44 @@
-import CourseCard from './CourseCard';
-import CoursePagination from './CoursePagination';
-import { useState } from 'react';
-import EvaluationCard from './EvaluationCard';
-import ProgressRate from './ProgressRate';
+import CourseCard from "./CourseCard";
+import CoursePagination from "./CoursePagination";
+import { useState } from "react";
+import EvaluationCard from "./EvaluationCard";
+import ProgressRate from "./ProgressRate";
 
 const CourseStatus = () => {
   const FakeCourses = [
     {
-      title: 'Intro To SQL',
+      title: "Intro To SQL",
       progress: 14,
       time: 35,
     },
     {
-      title: 'Intro To React',
+      title: "Intro To React",
       progress: 44,
       time: 25,
     },
     {
-      title: 'Intro To CSS',
+      title: "Intro To CSS",
       progress: 74,
       time: 15,
     },
   ];
   const topics = [
     {
-      topicName: 'Intro To React',
+      topicName: "Intro To React",
       progress: 80,
     },
     {
-      topicName: 'Intro To CSS',
+      topicName: "Intro To CSS",
       progress: 70,
     },
   ];
   const badTopics = [
     {
-      topicName: 'Intro To Next',
+      topicName: "Intro To Next",
       progress: 40,
     },
     {
-      topicName: 'Intro To Tailwind',
+      topicName: "Intro To Tailwind",
       progress: 50,
     },
   ];

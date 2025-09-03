@@ -1,5 +1,5 @@
-import { HiChevronRight, HiMiniClock } from 'react-icons/hi2';
-import ProgressBar from '../global/ProgressBar';
+import { HiChevronRight, HiMiniClock } from "react-icons/hi2";
+import ProgressBar from "../global/ProgressBar";
 
 type Props = {
   title: string;

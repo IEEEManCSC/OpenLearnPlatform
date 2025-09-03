@@ -1,4 +1,4 @@
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 type Props = {
   totalPages: number;
@@ -27,8 +27,8 @@ const CoursePagination: React.FC<Props> = ({
           onClick={() => setCurrentPage(i + 1)}
           className={`h-7 w-7 cursor-pointer rounded-md transition-all duration-300 ${
             i + 1 === currentPage
-              ? 'bg-lightOrange text-IEEEorange'
-              : 'hover:text-IEEEorange'
+              ? "bg-lightOrange text-IEEEorange"
+              : "hover:text-IEEEorange"
           }`}
         >
           {i + 1}

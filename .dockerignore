@@ -1,0 +1,52 @@
+# Exclude everything by default
+*
+
+# Include workspace files
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!package.json
+
+# Include web service
+!apps/web/
+
+# Include API service
+!apps/api/
+
+# Include recommendation API service
+!apps/recommendation-api/
+
+# Exclude node_modules and build artifacts
+**/node_modules/
+**/dist/
+**/.vite/
+**/coverage/
+**/.nyc_output/
+
+# But include generated Prisma client
+!**/src/generated/
+
+# Exclude logs and temporary files
+*.log
+*.tsbuildinfo
+.cache/
+.temp/
+
+# Exclude git and editor files
+.git/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Exclude OS files
+.DS_Store
+Thumbs.db
+
+# Exclude docker files
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+Makefile
+
+# But include startup scripts
+!**/start.sh

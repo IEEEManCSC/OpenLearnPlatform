@@ -4,11 +4,11 @@ import LoginForm from "../components/login/LoginForm";
 const Login = () => {
   return (
     <>
-      <div className="flex lg:flex-row lg:justify-between lg:mt-0 flex-col mt-10 items-center">
+      <div className="mt-10 flex flex-col items-center lg:mt-0 lg:flex-row lg:justify-between">
         <LoginForm />
-        <div className="relative md:h-screen h-[50vh] overflow-clip lg:w-1/2 w-full ">
-          <Cover className="absolute h-screen top-0 -right-50" />
-          <Logo className="absolute md:top-44 top-28 h-[110px] md:h-[300px] right-5 sm:w-1/2 w-3/4 " />
+        <div className="relative h-[50vh] w-full overflow-clip md:h-screen lg:w-1/2">
+          <Cover className="absolute top-0 -right-50 h-screen" />
+          <Logo className="absolute top-28 right-5 h-[110px] w-3/4 sm:w-1/2 md:top-44 md:h-[300px]" />
         </div>
       </div>
     </>

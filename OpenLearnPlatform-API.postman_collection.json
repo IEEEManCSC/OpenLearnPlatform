@@ -1,0 +1,1071 @@
+{
+  "info": {
+    "name": "OpenLearnPlatform API",
+    "description": "Complete API collection for OpenLearnPlatform with authentication, tracks, courses, topics, notes, and quizzes endpoints",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "api_prefix",
+      "value": "/api",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Tracks",
+      "item": [
+        {
+          "name": "Get All Tracks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/tracks",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "tracks"]
+            },
+            "description": "Retrieve all available learning tracks"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/tracks",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "tracks"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": [\n    {\n      \"id\": \"track_1\",\n      \"name\": \"Frontend Development\",\n      \"description\": \"Learn modern frontend technologies\",\n      \"icon\": \"frontend-icon.svg\",\n      \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n      \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Track by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/tracks/:trackId?levelId=beginner",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "tracks", ":trackId"],
+              "query": [
+                {
+                  "key": "levelId",
+                  "value": "beginner",
+                  "description": "Optional filter by level"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "trackId",
+                  "value": "track_1",
+                  "description": "Track identifier (required)"
+                }
+              ]
+            },
+            "description": "Get specific track with its courses, optionally filtered by level"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/tracks/track_1?levelId=beginner",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "tracks", "track_1"],
+                  "query": [
+                    {
+                      "key": "levelId",
+                      "value": "beginner"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"id\": \"track_1\",\n    \"name\": \"Frontend Development\",\n    \"description\": \"Learn modern frontend technologies\",\n    \"icon\": \"frontend-icon.svg\",\n    \"courses\": [\n      {\n        \"id\": \"course_1\",\n        \"name\": \"HTML Basics\",\n        \"description\": \"Introduction to HTML\",\n        \"level\": \"beginner\"\n      }\n    ]\n  }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Learning tracks management"
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Get Course by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/courses/:courseId",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "courses", ":courseId"],
+              "variable": [
+                {
+                  "key": "courseId",
+                  "value": "course_1",
+                  "description": "Course identifier (required)"
+                }
+              ]
+            },
+            "description": "Get course details with topics and completion percentage"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/courses/course_1",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "courses", "course_1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"id\": \"course_1\",\n    \"name\": \"HTML Basics\",\n    \"description\": \"Introduction to HTML\",\n    \"level\": \"beginner\",\n    \"topics\": [\n      {\n        \"id\": \"topic_1\",\n        \"name\": \"HTML Elements\",\n        \"content\": \"Learn about HTML elements\"\n      }\n    ],\n    \"completedPercentage\": 75.5\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Course Topics",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/courses/:courseId/topics?completed=true",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "courses", ":courseId", "topics"],
+              "query": [
+                {
+                  "key": "completed",
+                  "value": "true",
+                  "description": "Filter by completion status (true/false)"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "courseId",
+                  "value": "course_1",
+                  "description": "Course identifier (required)"
+                }
+              ]
+            },
+            "description": "Get all topics for a course, optionally filtered by completion status"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/courses/course_1/topics?completed=true",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "courses", "course_1", "topics"],
+                  "query": [
+                    {
+                      "key": "completed",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": [\n    {\n      \"id\": \"topic_1\",\n      \"name\": \"HTML Elements\",\n      \"content\": \"Learn about HTML elements\",\n      \"completed\": true,\n      \"completedAt\": \"2024-08-25T10:00:00.000Z\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Course management and topic tracking"
+    },
+    {
+      "name": "Topics",
+      "item": [
+        {
+          "name": "Get Topic by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/topics/:topicId",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "topics", ":topicId"],
+              "variable": [
+                {
+                  "key": "topicId",
+                  "value": "topic_1",
+                  "description": "Topic identifier (required)"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific topic"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/topics/topic_1",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "topics", "topic_1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"id\": \"topic_1\",\n    \"name\": \"HTML Elements\",\n    \"content\": \"Learn about HTML elements and their structure\",\n    \"courseId\": \"course_1\",\n    \"order\": 1,\n    \"completed\": false,\n    \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n    \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Mark Topic as Completed",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/topics/:topicId/completion",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "topics", ":topicId", "completion"],
+              "variable": [
+                {
+                  "key": "topicId",
+                  "value": "topic_1",
+                  "description": "Topic identifier (required)"
+                }
+              ]
+            },
+            "description": "Mark a topic as completed for the authenticated user"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/topics/topic_1/completion",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "topics", "topic_1", "completion"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 201,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"id\": \"completion_1\",\n    \"userId\": \"user_123\",\n    \"topicId\": \"topic_1\",\n    \"completedAt\": \"2024-08-30T10:00:00.000Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Unmark Topic as Completed",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/topics/:topicId/completion",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "topics", ":topicId", "completion"],
+              "variable": [
+                {
+                  "key": "topicId",
+                  "value": "topic_1",
+                  "description": "Topic identifier (required)"
+                }
+              ]
+            },
+            "description": "Remove completion status from a topic for the authenticated user"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/topics/topic_1/completion",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "topics", "topic_1", "completion"]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 204,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": null\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Topic completion tracking"
+    },
+    {
+      "name": "Notes",
+      "item": [
+        {
+          "name": "Get All Notes",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/notes?courseId=course_1&topicId=topic_1&search=html&sort=createdAt,-title&page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "notes"],
+              "query": [
+                {
+                  "key": "courseId",
+                  "value": "course_1",
+                  "description": "Filter by course ID (CUID)"
+                },
+                {
+                  "key": "topicId",
+                  "value": "topic_1",
+                  "description": "Filter by topic ID (CUID)"
+                },
+                {
+                  "key": "search",
+                  "value": "html",
+                  "description": "Search in title and content"
+                },
+                {
+                  "key": "sort",
+                  "value": "createdAt,-title",
+                  "description": "Sort fields (title, -title, createdAt, -createdAt, updatedAt, -updatedAt)"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (default: 1)"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Items per page (default: 10)"
+                }
+              ]
+            },
+            "description": "Get all notes for the authenticated user with filtering, searching, sorting, and pagination"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/notes?page=1&limit=10",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "notes"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": [\n    {\n      \"id\": \"note_1\",\n      \"title\": \"HTML Elements Notes\",\n      \"content\": \"Important points about HTML elements...\",\n      \"topicId\": \"topic_1\",\n      \"userId\": \"user_123\",\n      \"createdAt\": \"2024-08-30T10:00:00.000Z\",\n      \"updatedAt\": \"2024-08-30T10:00:00.000Z\"\n    }\n  ],\n  \"pagination\": {\n    \"totalItems\": 25,\n    \"totalPages\": 3,\n    \"currentPage\": 1,\n    \"itemsPerPage\": 10\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Note by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/notes/:noteId",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "notes", ":noteId"],
+              "variable": [
+                {
+                  "key": "noteId",
+                  "value": "note_1",
+                  "description": "Note identifier (CUID, required)"
+                }
+              ]
+            },
+            "description": "Get a specific note by its ID"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/notes/note_1",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "notes", "note_1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"id\": \"note_1\",\n    \"title\": \"HTML Elements Notes\",\n    \"content\": \"Important points about HTML elements and their structure...\",\n    \"topicId\": \"topic_1\",\n    \"userId\": \"user_123\",\n    \"createdAt\": \"2024-08-30T10:00:00.000Z\",\n    \"updatedAt\": \"2024-08-30T10:00:00.000Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Note",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My HTML Notes\",\n  \"content\": \"These are my notes about HTML elements and their usage.\",\n  \"topicId\": \"clabcd1234567890abcdef12\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/notes",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "notes"]
+            },
+            "description": "Create a new note for a specific topic"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"My HTML Notes\",\n  \"content\": \"These are my notes about HTML elements and their usage.\",\n  \"topicId\": \"clabcd1234567890abcdef12\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/notes",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "notes"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 201,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"id\": \"clnew1234567890abcdef12\",\n    \"title\": \"My HTML Notes\",\n    \"content\": \"These are my notes about HTML elements and their usage.\",\n    \"topicId\": \"clabcd1234567890abcdef12\",\n    \"userId\": \"user_123\",\n    \"createdAt\": \"2024-08-30T10:00:00.000Z\",\n    \"updatedAt\": \"2024-08-30T10:00:00.000Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Note",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated HTML Notes\",\n  \"content\": \"Updated content about HTML elements with more details.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/notes/:noteId",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "notes", ":noteId"],
+              "variable": [
+                {
+                  "key": "noteId",
+                  "value": "note_1",
+                  "description": "Note identifier (CUID, required)"
+                }
+              ]
+            },
+            "description": "Update an existing note (title and/or content are optional)"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Updated HTML Notes\",\n  \"content\": \"Updated content about HTML elements with more details.\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/notes/note_1",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "notes", "note_1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"id\": \"note_1\",\n    \"title\": \"Updated HTML Notes\",\n    \"content\": \"Updated content about HTML elements with more details.\",\n    \"topicId\": \"topic_1\",\n    \"userId\": \"user_123\",\n    \"createdAt\": \"2024-08-30T09:00:00.000Z\",\n    \"updatedAt\": \"2024-08-30T10:00:00.000Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Note",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/notes/:noteId",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "notes", ":noteId"],
+              "variable": [
+                {
+                  "key": "noteId",
+                  "value": "note_1",
+                  "description": "Note identifier (CUID, required)"
+                }
+              ]
+            },
+            "description": "Delete a note permanently"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/notes/note_1",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "notes", "note_1"]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 204,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": null\n}"
+            }
+          ]
+        }
+      ],
+      "description": "User notes management with full CRUD operations"
+    },
+    {
+      "name": "Quizzes",
+      "item": [
+        {
+          "name": "Get Quiz Calendar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/quizzes/calendar?month=8&year=2024",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "quizzes", "calendar"],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "8",
+                  "description": "Month (1-12, optional - defaults to current month)"
+                },
+                {
+                  "key": "year",
+                  "value": "2024",
+                  "description": "Year (2000-2100, optional - defaults to current year)"
+                }
+              ]
+            },
+            "description": "Get calendar view of quiz submissions for a specific month and year"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/quizzes/calendar?month=8&year=2024",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "quizzes", "calendar"],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": "8"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"year\": 2024,\n    \"month\": 8,\n    \"days\": [\n      {\n        \"day\": 1,\n        \"hasSubmission\": true,\n        \"score\": 85.5\n      },\n      {\n        \"day\": 2,\n        \"hasSubmission\": false,\n        \"score\": null\n      },\n      {\n        \"day\": 30,\n        \"hasSubmission\": true,\n        \"score\": 92.0\n      }\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Daily Quiz",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/quizzes/daily",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "quizzes", "daily"]
+            },
+            "description": "Get or generate today's quiz for the authenticated user. If already submitted, returns AlreadySubmittedQuiz error."
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/quizzes/daily",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "quizzes", "daily"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"quiz\": {\n      \"id\": \"quiz_123\",\n      \"userId\": \"user_123\",\n      \"date\": \"2024-08-30T00:00:00.000Z\",\n      \"totalQuestions\": 10,\n      \"submittedAt\": null,\n      \"score\": null\n    },\n    \"questions\": [\n      {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"question\": \"What does HTML stand for?\",\n        \"choices\": [\n          \"Hypertext Markup Language\",\n          \"High Tech Modern Language\",\n          \"Home Tool Markup Language\",\n          \"Hyperlink and Text Markup Language\"\n        ],\n        \"difficulty\": \"beginner\",\n        \"topic\": \"HTML Basics\"\n      }\n    ],\n    \"aiRecommendation\": {\n      \"recommendedTopics\": [\n        {\n          \"topic\": \"HTML Basics\",\n          \"difficulty\": \"beginner\",\n          \"count\": 5\n        },\n        {\n          \"topic\": \"CSS Fundamentals\",\n          \"difficulty\": \"beginner\",\n          \"count\": 3\n        }\n      ],\n      \"reasoning\": \"Based on your progress, focusing on HTML basics will strengthen your foundation.\"\n    }\n  }\n}"
+            },
+            {
+              "name": "Already Submitted Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/quizzes/daily",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "quizzes", "daily"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"error\": {\n    \"name\": \"AlreadySubmittedQuiz\",\n    \"message\": \"You have already submitted today's quiz\"\n  }\n}"
+            },
+            {
+              "name": "Not Enough Topics Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/quizzes/daily",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "quizzes", "daily"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"error\": {\n    \"name\": \"NotEnoughTopics\",\n    \"message\": \"Not enough completed topics to generate quiz\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Submit Daily Quiz",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"answers\": [\n    {\n      \"questionId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"choiceIndex\": 0\n    },\n    {\n      \"questionId\": \"550e8400-e29b-41d4-a716-446655440001\",\n      \"choiceIndex\": 2\n    },\n    {\n      \"questionId\": \"550e8400-e29b-41d4-a716-446655440002\",\n      \"choiceIndex\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_prefix}}/quizzes/daily",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_prefix}}", "quizzes", "daily"]
+            },
+            "description": "Submit answers for today's daily quiz"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"answers\": [\n    {\n      \"questionId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"choiceIndex\": 0\n    },\n    {\n      \"questionId\": \"550e8400-e29b-41d4-a716-446655440001\",\n      \"choiceIndex\": 2\n    },\n    {\n      \"questionId\": \"550e8400-e29b-41d4-a716-446655440002\",\n      \"choiceIndex\": 1\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}{{api_prefix}}/quizzes/daily",
+                  "host": ["{{base_url}}"],
+                  "path": ["{{api_prefix}}", "quizzes", "daily"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"timestamp\": \"2024-08-30T10:00:00.000Z\",\n  \"data\": {\n    \"score\": 86.7,\n    \"correctCount\": 8,\n    \"total\": 10,\n    \"answers\": [\n      {\n        \"questionId\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"choiceIndex\": 0,\n        \"isCorrect\": true,\n        \"correctChoiceIndex\": 0,\n        \"explanation\": \"HTML stands for Hypertext Markup Language\"\n      },\n      {\n        \"questionId\": \"550e8400-e29b-41d4-a716-446655440001\",\n        \"choiceIndex\": 2,\n        \"isCorrect\": false,\n        \"correctChoiceIndex\": 1,\n        \"explanation\": \"The correct answer is CSS stands for Cascading Style Sheets\"\n      }\n    ]\n  }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Daily quiz system with AI-powered question generation and progress tracking"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "// Check if auth_token is set, if not, remind user to authenticate",
+          "const authToken = pm.collectionVariables.get('auth_token');",
+          "if (!authToken && pm.request.auth && pm.request.auth.type === 'bearer') {",
+          "    console.log('⚠️  Authentication token not set. Please sign in first or set the auth_token variable.');",
+          "}"
+        ],
+        "type": "text/javascript"
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          "// Test for successful responses",
+          "pm.test('Status code is success', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+          "});",
+          "",
+          "// Test response structure",
+          "if (pm.response.code !== 204) {",
+          "    pm.test('Response has required structure', function () {",
+          "        const jsonData = pm.response.json();",
+          "        pm.expect(jsonData).to.have.property('success');",
+          "        pm.expect(jsonData).to.have.property('statusCode');",
+          "        pm.expect(jsonData).to.have.property('timestamp');",
+          "        pm.expect(jsonData).to.have.property('data');",
+          "    });",
+          "}",
+          "",
+          "// Auth token can be set manually in collection variables",
+          "// Set 'auth_token' variable with your authentication token"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ]
+}

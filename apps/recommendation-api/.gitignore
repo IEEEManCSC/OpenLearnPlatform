@@ -1,0 +1,8 @@
+/myenv
+.history
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ruff_cache/
+.venv/

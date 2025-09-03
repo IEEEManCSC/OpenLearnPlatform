@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"
+  moduleFormat = "esm"
+  output       = "../src/generated/prisma"
 }
 
 datasource db {
@@ -14,24 +15,183 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Course {
+model Track {
+  id               String            @id @default(cuid())
+  title            String
+  description      String?
+  createdBy        String
+  createdByUser    User              @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  joinedUsers      User[]            @relation("joinedTrack")
+  courses          Course[]
+  trackInstructors TrackInstructor[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model Level {
   id          String   @id @default(cuid())
   title       String
   description String?
+  courses     Course[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  order       Int
+  trackId     String
+  track       Track    @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  levelId     String
+  level       Level    @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  topics      Topic[]
+  notes       Note[]
+}
+
+model Topic {
+  id                String                 @id @default(cuid())
+  title             String
+  durationInMinutes Int
+  content           String                 @db.Text
+  order             Int
+  courseId          String
+  course            Course                 @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  createdBy         String
+  createdByUser     User                   @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  userCompletions   UserCompletion[]
+  questions         Question[]
+  userPerformances  UserTopicPerformance[]
+
+  notes             Note[]
+}
+
+model Note {
+  id      String @id @default(cuid())
+  title   String
+  content String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // --- Relations ---
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topicId  String
+  topic    Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+}
+
+model UserCompletion {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topicId   String
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, topicId])
+}
+
+model UserTopicPerformance {
+  id         String             @id @default(cuid())
+  userId     String
+  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topicId    String
+  topic      Topic              @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  difficulty QuestionDifficulty
+  attempted  Int                @default(0)
+  solved     Int                @default(0)
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  @@unique([userId, topicId])
+}
+
+model TrackInstructor {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trackId   String
+  track     Track    @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, trackId])
+}
+
+enum QuestionDifficulty {
+  easy
+  medium
+  hard
+}
+
+model Question {
+  id                 String             @id @default(cuid())
+  statement          String
+  difficulty         QuestionDifficulty @default(medium)
+  options            String[]
+  correctOptionIndex Int
+  topics             Topic[]
+  createdBy          String
+  createdByUser      User               @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+}
+
+model DailyQuiz {
+  id          String    @id @default(cuid())
+  userId      String
+  score       Float
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  submittedAt DateTime?
+  totalQuestions Int @default(10)
+  quizDate    DateTime  // Should be set to the date (midnight) of the quiz, without time component
+
+  @@unique([userId, quizDate])
+}
+
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
+  id              String   @id
+  name            String
+  email           String
+  emailVerified   Boolean
+  discordUsername String?
+  image           String?
+  createdAt       DateTime
+  updatedAt       DateTime
+
+  // Auth
+  sessions   Session[]
+  accounts   Account[]
+  role       String?
+  banned     Boolean?
+  banReason  String?
+  banExpires DateTime?
+
+  // Students
+  trackId         String?
+  joinedTrack     Track?           @relation(fields: [trackId], references: [id], onDelete: Cascade, name: "joinedTrack")
+  userCompletions UserCompletion[]
+  notes           Note[]
+
+  // Instructors
+  createdTracks      Track[]
+  createdTopics      Topic[]
+  createdQuestions   Question[]
+  instructorOfTracks TrackInstructor[]
+  topicPerformances  UserTopicPerformance[]
+  dailyQuizzes       DailyQuiz[]
 
   @@unique([email])
   @@map("user")
@@ -47,6 +207,8 @@ model Session {
   userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
 
   @@unique([token])
   @@map("session")
@@ -90,3 +252,4 @@ model Jwks {
 
   @@map("jwks")
 }
+
