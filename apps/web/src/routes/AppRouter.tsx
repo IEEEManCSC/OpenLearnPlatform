@@ -6,6 +6,8 @@ import Authenticator from "../lib/Authenticator";
 import MainLayout from "@layouts/MainLayout";
 
 // Pages
+import SignUp from "@pages/SIgnUp";
+
 import Login from "@pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Roadmap from "../pages/Roadmap";
@@ -26,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
   },
   {
     path: "choose",

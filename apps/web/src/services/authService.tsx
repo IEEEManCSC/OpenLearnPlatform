@@ -10,6 +10,27 @@ async function login(email: string, password: string) {
   }
 }
 
+async function register(
+  name: string,
+  email: string,
+  password: string,
+  discordUsername: string,
+  trackId: string,
+) {
+  try {
+    const res = await authClient.signUp.email({
+      name,
+      email,
+      password,
+      discordUsername,
+      trackId,
+    });
+    console.log("Registered user:", res);
+    return res;
+  } catch (err) {
+    console.error("Registration failed:", err);
+  }
+}
 async function getProfile() {
   try {
     const res = await authClient.getSession();
@@ -20,4 +41,4 @@ async function getProfile() {
   }
 }
 
-export { login, getProfile };
+export { login, register, getProfile };

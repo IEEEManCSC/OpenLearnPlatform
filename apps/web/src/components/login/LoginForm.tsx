@@ -14,6 +14,7 @@ import { Checkbox } from "@components/ui/checkbox";
 import { User, Lock } from "lucide-react";
 import { loginSchema } from "@/src/validation/loginSchema";
 import { login } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
   username: string;
@@ -33,6 +34,7 @@ const formField: InputField[] = [
 ];
 
 function LoginForm() {
+  const navigate = useNavigate();
   const form = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -133,6 +135,14 @@ function LoginForm() {
         >
           Login
         </Button>
+        <Label
+          className="border-b-IEEEorange text-IEEEorange border-b-2 pb-2 font-bold"
+          onClick={() => {
+            navigate("/sign-up");
+          }}
+        >
+          Sign up
+        </Label>
       </form>
     </Form>
   );

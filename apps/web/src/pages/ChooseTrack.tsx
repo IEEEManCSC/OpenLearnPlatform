@@ -6,12 +6,16 @@ import DataEngineering from "../../public/trackIcons/Frame 1261156626.svg?react"
 import Embedded from "../../public/trackIcons/Mask group.svg?react";
 import Frontend from "../../public/trackIcons/html-5.svg?react";
 import Cyber from "../../public/trackIcons/security-safe.svg?react";
-import Frame from "../../public/trackIcons/Frametrack.svg?react";
+import Frame from "../../public/trackIcons/Frametrack.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
+import { register } from "../services/authService";
 
 function ChooseTrack() {
+  const { username, email, password, discordUsername } = useAuthStore();
+
   const tracks = [
     { name: "UI/UX", icon: Ui },
     { name: "Frontend", icon: Frontend },
@@ -25,10 +29,26 @@ function ChooseTrack() {
   const levels = ["Beginner", "Intermediate", "Advanced"];
   const [selected, setSelected] = useState("");
   const navigate = useNavigate();
+  const handeSubmit = async () => {
+    try {
+      // register(username, email, password, discordUsername, selected);
+      console.log(username, email, password, discordUsername, selected);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Frame />
-      <div className="sm:10/12 m-auto w-11/12 text-xl sm:text-2xl lg:-mt-10 lg:w-2/3">
+    <div
+      className="flex min-h-screen items-center justify-center bg-gray-50"
+      style={{
+        backgroundImage: `url("${Frame}")`, // Replace with your actual frame image path
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="sm:10/12 z-10 m-auto w-11/12 text-xl sm:text-2xl lg:-mt-10 lg:w-2/3">
         <div>
           <p className="mb-5 text-center font-semibold">
             which track are you interested in?
@@ -73,14 +93,18 @@ function ChooseTrack() {
             </div>
             <div
               className="bg-IEEEorange hidden h-10 w-10 cursor-pointer items-center justify-center rounded-full md:flex"
-              onClick={() => navigate("/")}
+              onClick={() => {
+                handeSubmit();
+              }}
             >
               <ChevronRight color="white" />
             </div>
           </div>
           <div
             className="flex cursor-pointer items-center justify-end md:hidden"
-            onClick={() => navigate("/")}
+            onClick={() => {
+              handeSubmit();
+            }}
           >
             <ChevronRight
               color="white"
