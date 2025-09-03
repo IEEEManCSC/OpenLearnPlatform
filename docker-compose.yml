@@ -6,12 +6,13 @@ services:
       cache_from:
         - openlearnplatform-web:cache
       target: production
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_RECOMMENDATION_API_URL: ${VITE_RECOMMENDATION_API_URL}
     ports:
       - "20251:5173"
     environment:
       - NODE_ENV=production
-      - VITE_API_URL=${VITE_API_URL}
-      - VITE_RECOMMENDATION_API_URL=${VITE_RECOMMENDATION_API_URL}
     depends_on:
       - api
       - recommendation-api
