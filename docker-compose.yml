@@ -63,7 +63,7 @@ services:
   postgres:
     image: postgres:15-alpine
     ports:
-      - "5432"
+      - "54322:5432"
     environment:
       - POSTGRES_DB=${POSTGRES_DB:-openlearn}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
