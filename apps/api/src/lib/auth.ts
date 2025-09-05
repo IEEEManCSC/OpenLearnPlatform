@@ -36,6 +36,7 @@ export const auth = betterAuth({
     },
   },
   appName: "api",
+  trustedOrigins: ["http://localhost:5173", "https://olp.csc.ieeemansb.org"],
   plugins: [
     openAPI(),
     bearer(),
