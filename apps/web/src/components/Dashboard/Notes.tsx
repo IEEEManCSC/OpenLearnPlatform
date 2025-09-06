@@ -36,7 +36,7 @@ function Notes() {
           </div>
         ))}
         <Link
-          to={"/notes"}
+          to={"notes"}
           className="text-IEEEorange group mt-2 flex cursor-pointer items-center justify-center gap-1 text-xl font-bold"
         >
           <p>View All</p>
