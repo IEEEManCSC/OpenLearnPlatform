@@ -1,19 +1,7 @@
 import axiosInstance from "../config/axiosInstance";
+import { Course } from "../modules/courses/Course.interface";
 
-export interface Topic {
-  id: string;
-  name: string;
-  content: string;
-}
 
-export interface Course {
-  id: string;
-  name: string;
-  description: string;
-  level: string;
-  topics: Topic[];
-  completedPercentage: number;
-}
 
 export const courseService = {
   // 🟢 Get all courses

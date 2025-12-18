@@ -1,7 +1,7 @@
 // src/hooks/courseHooks.ts
 import { useQuery } from "@tanstack/react-query";
-import { courseService, Course } from "../services/coursesService";
-
+import { courseService } from "../services/coursesService";
+import { Course } from "../modules/courses/Course.interface";
 // ================== useCoursesList ==================
 export const useCoursesList = () => {
   return useQuery<Course[]>({

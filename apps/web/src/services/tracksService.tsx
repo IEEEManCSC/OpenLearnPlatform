@@ -1,29 +1,6 @@
 import axiosInstance from "../config/axiosInstance";
-
-// ✅ Track interface
-export interface Track {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Pagination {
-  totalItems: number;
-  totalPages: number;
-  currentPage: number;
-  itemsPerPage: number;
-}
-
-export interface ApiResponse<T> {
-  success: boolean;
-  statusCode: number;
-  timestamp: string;
-  data: T;
-  pagination?: Pagination;
-}
+import { Track } from "../modules/tracks/tracks.interface";
+import { ApiResponse } from "../modules/apiResponse/apiResponse.interface";
 
 export const trackService = {
   // 🟢 Get tracks list

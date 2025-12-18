@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { userService, NotesListParams } from "../services/notesService";
+import { userService } from "../services/notesService";
+import { NotesListParams } from "../modules/notes/notes.interface";
 
 // 🟢 Get Notes List
 export const useNotesList = (params: NotesListParams) => {
