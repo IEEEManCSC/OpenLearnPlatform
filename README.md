@@ -8,7 +8,7 @@ OpenLearnPlatform is a community-driven, open-source learning platform aimed at 
 
 The development and delivery of OpenLearnPlatform were overseen by a technical leadership team responsible for managing the project at both technical and organizational levels. This team coordinated the efforts of multiple committees and contributors, ensuring alignment with the project vision, timelines, and quality standards.
 
-# Technical Directors
+## Technical Directors
 
 The Technical Directors were responsible for the overall management of the project, including:
 	•	Coordinating and supervising all technical committees involved in the platform.
@@ -16,14 +16,12 @@ The Technical Directors were responsible for the overall management of the proje
 	•	Ensuring adherence to architectural guidelines, coding standards, and best practices.
 	•	Reviewing contributions and maintaining technical consistency across the codebase.
 	•	Managing communication between contributors and resolving technical and organizational challenges.
-
+  
 | Name | Role | GitHub | Contact |
 |------|------|--------|---------|
 | Ziad El-Naggar | Technical Director | ZEYAD-8 | zeyadosama15@gmail.com |
 
----
-
-# Project Oversight and Coordination
+## Project Oversight and Coordination
 
 Beyond technical implementation, the leadership team was responsible for managing contributors, tracking individual and team performance, and ensuring effective collaboration across different functional committees. This included planning workflows, reviewing pull requests, maintaining documentation, and enforcing contribution guidelines to sustain a scalable and maintainable development process.
 
