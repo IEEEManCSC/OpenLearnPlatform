@@ -17,9 +17,10 @@ The Technical Directors were responsible for the overall management of the proje
 	•	Reviewing contributions and maintaining technical consistency across the codebase.
 	•	Managing communication between contributors and resolving technical and organizational challenges.
   
-| Name | Role | GitHub | Contact |
-|------|------|--------|---------|
-| Ziad El-Naggar | Technical Director | ZEYAD-8 | zeyadosama15@gmail.com |
+| Name | Role | GitHub Username | Contact | LinkedIn |
+|------|------|-----------------|---------|----------|
+| Ziad El-Naggar | Technical Director | ZEYAD-8 | zeyadosama15@gmail.com | https://www.linkedin.com/in/zeyad-elnaggar |
+| Ahmed Aldesouk | Technical Director | Sir-Elite | awaleed12389@gmail.com | https://www.linkedin.com/in/ahmed-aldesouky |
 
 ## Project Oversight and Coordination
 
